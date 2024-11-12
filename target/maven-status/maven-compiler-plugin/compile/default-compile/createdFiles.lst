@@ -1,0 +1,11 @@
+ufes\br\model\Cliente.class
+ufes\br\model\Pedido.class
+ufes\br\sistemapedidos\Principal.class
+ufes\br\discount\MetodoDescontoValorPedido.class
+ufes\br\interfaces\IMetodoDescontoTaxaEntrega.class
+ufes\br\services\CalculadoraDeTaxaDescontoService.class
+ufes\br\discount\MetodoDescontoTaxaPorBairro.class
+ufes\br\discount\MetodoDescontoTipoItem.class
+ufes\br\model\Item.class
+ufes\br\discount\MetodoDescontoTaxaPorTipoCliente.class
+ufes\br\model\CupomDescontoEntrega.class

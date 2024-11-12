@@ -1,4 +1,4 @@
-package ufes.br.sistemapedidos;
+package ufes.br.sistemadelivery;
 
 import ufes.br.services.CalculadoraDeTaxaDescontoService;
 import ufes.br.interfaces.IMetodoDescontoTaxaEntrega;

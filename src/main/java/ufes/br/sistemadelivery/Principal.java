@@ -1,14 +1,15 @@
 package ufes.br.sistemadelivery;
 
 import ufes.br.services.CalculadoraDeTaxaDescontoService;
+import ufes.br.desconto.MetodoDescontoTaxaPorBairro;
+import ufes.br.desconto.MetodoDescontoTaxaPorTipoCliente;
+import ufes.br.desconto.MetodoDescontoTipoItem;
+import ufes.br.desconto.MetodoDescontoValorPedido;
 import ufes.br.interfaces.IMetodoDescontoTaxaEntrega;
 import ufes.br.model.Pedido;
 import ufes.br.model.Item;
 import ufes.br.model.Cliente;
-import ufes.br.discount.MetodoDescontoTipoItem;
-import ufes.br.discount.MetodoDescontoTaxaPorBairro;
-import ufes.br.discount.MetodoDescontoValorPedido;
-import ufes.br.discount.MetodoDescontoTaxaPorTipoCliente;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

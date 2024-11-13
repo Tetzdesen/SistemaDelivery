@@ -1,4 +1,4 @@
-package ufes.br.discount;
+package ufes.br.desconto;
 
 import ufes.br.model.CupomDescontoEntrega;
 import ufes.br.interfaces.IMetodoDescontoTaxaEntrega;

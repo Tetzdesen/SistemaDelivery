@@ -1,4 +1,4 @@
-package ufes.br.discount;
+package ufes.br.desconto;
 
 import java.util.HashMap;
 import java.util.Map;

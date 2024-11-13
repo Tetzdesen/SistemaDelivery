@@ -11,7 +11,6 @@ import ufes.br.model.Pedido;
  * @author tetzner
  */
 public class MetodoDescontoTaxaPorBairro implements IMetodoDescontoTaxaEntrega {
-    private String bairroCliente;
     private Map<String, Double> descontosPorBairro = new HashMap<>();
     
     public MetodoDescontoTaxaPorBairro(){
@@ -21,24 +20,20 @@ public class MetodoDescontoTaxaPorBairro implements IMetodoDescontoTaxaEntrega {
     }
     
     @Override
-    public CupomDescontoEntrega calcularDesconto(Pedido pedido) {
-        bairroCliente = pedido.getCliente().getBairro();
+    public void calcularDesconto(Pedido pedido) {
+        String bairroCliente = pedido.getCliente().getBairro();
         double valorDesconto;
 
         if(seAplica(pedido)){
-            valorDesconto = descontosPorBairro.get(pedido.getCliente().getBairro());
-            if(pedido.getDescontoConcedido() + valorDesconto > 10.00){ 
-                return new CupomDescontoEntrega("Desconto parcial por bairro", 10.00 - pedido.getDescontoConcedido()); 
-            }
-            
-            return new CupomDescontoEntrega("Desconto total por bairro", valorDesconto);
+            valorDesconto = descontosPorBairro.get(bairroCliente);
+            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por bairro", valorDesconto));
         }
-        return null; 
     }
 
     @Override
     public boolean seAplica(Pedido pedido) {
-        return (bairroCliente.equals("Centro") || bairroCliente.equals("Bela Vista") || bairroCliente.equals("Cidade Maravilhosa"));
+        String bairroCliente = pedido.getCliente().getBairro();
+        return descontosPorBairro.containsKey(bairroCliente);
     }
     
 }

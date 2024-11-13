@@ -11,7 +11,6 @@ import ufes.br.model.Pedido;
  * @author tetzner
  */
 public class MetodoDescontoTaxaPorTipoCliente implements IMetodoDescontoTaxaEntrega {
-    private String tipoCliente;
     private Map<String,Double> descontosPorTipoCliente = new HashMap<>();
     
     public MetodoDescontoTaxaPorTipoCliente(){
@@ -21,23 +20,20 @@ public class MetodoDescontoTaxaPorTipoCliente implements IMetodoDescontoTaxaEntr
     }
     
     @Override
-    public CupomDescontoEntrega calcularDesconto(Pedido pedido) {
+    public void calcularDesconto(Pedido pedido) {
 
-        tipoCliente = pedido.getCliente().getTipo();
+        String tipoCliente = pedido.getCliente().getTipo();
         double valorDesconto;
         
         if(seAplica(pedido)){
-            valorDesconto = descontosPorTipoCliente.get(pedido.getCliente().getTipo());
-            if(pedido.getDescontoConcedido() + valorDesconto > 10.00){ 
-                return new CupomDescontoEntrega("Desconto parcial por tipo de cliente", 10.00 - pedido.getDescontoConcedido()); 
-            }  
-            return new CupomDescontoEntrega("Desconto total por tipo de cliente", valorDesconto);
+            valorDesconto = descontosPorTipoCliente.get(tipoCliente);
+            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por tipo de cliente", valorDesconto));
         }
-        return null;
     }
 
     @Override
     public boolean seAplica(Pedido pedido) {
-        return (tipoCliente.equals("Ouro") || tipoCliente.equals("Prata") || tipoCliente.equals("Bronze"));
+        String tipoCliente = pedido.getCliente().getTipo();
+        return descontosPorTipoCliente.containsKey(tipoCliente);
     }
 }

@@ -2,6 +2,7 @@ package ufes.br.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -9,13 +10,14 @@ import java.util.List;
  * @author tetzner
  */
 public class Pedido {
-    private double taxaEntrega = 10.00;
+    private double taxaEntrega;
     private LocalDate dataPedido;
     private Cliente cliente;
     private List<Item> itens = new ArrayList<>();
     private List<CupomDescontoEntrega> cuponsDescontoEntrega = new ArrayList<>();
     
-    public Pedido(LocalDate dataPedido, Cliente cliente){
+    public Pedido(double taxaEntrega, LocalDate dataPedido, Cliente cliente){
+        this.taxaEntrega = taxaEntrega;
         this.dataPedido = dataPedido;
         this.cliente = cliente;
     }
@@ -39,7 +41,7 @@ public class Pedido {
     }
     
     public List<Item> getItens(){
-        return itens;
+        return Collections.unmodifiableList(itens);
     }
     
     public double getTaxaEntrega(){
@@ -58,15 +60,18 @@ public class Pedido {
         double descontoConcedido = 0.0;
         
         for(CupomDescontoEntrega cupomDescontoEntrega: cuponsDescontoEntrega){
-            if(cupomDescontoEntrega != null){
-                descontoConcedido += cupomDescontoEntrega.getValorDesconto();
-            }
+            descontoConcedido += cupomDescontoEntrega.getValorDesconto();
         }
+        
+        if(descontoConcedido > taxaEntrega){
+            return taxaEntrega;
+        }
+        
         return descontoConcedido;
     }
     
     public List<CupomDescontoEntrega> getCuponsDescontoEntrega(){
-        return cuponsDescontoEntrega;
+       return Collections.unmodifiableList(cuponsDescontoEntrega);
     }
 
     @Override

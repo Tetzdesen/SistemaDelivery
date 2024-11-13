@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import ufes.br.interfaces.IMetodoDescontoTaxaEntrega;
 import ufes.br.model.Pedido;
 import java.util.List;
-import ufes.br.model.CupomDescontoEntrega;
+import ufes.br.desconto.MetodoDescontoTaxaPorBairro;
+import ufes.br.desconto.MetodoDescontoTaxaPorTipoCliente;
+import ufes.br.desconto.MetodoDescontoTipoItem;
+import ufes.br.desconto.MetodoDescontoValorPedido;
 
 /**
  *
@@ -13,22 +16,21 @@ import ufes.br.model.CupomDescontoEntrega;
 public class CalculadoraDeTaxaDescontoService {
     private List<IMetodoDescontoTaxaEntrega> metodosDeDesconto = new ArrayList<>();
     
-    public CalculadoraDeTaxaDescontoService(List<IMetodoDescontoTaxaEntrega> metodosDeDesconto){
-       this.metodosDeDesconto = metodosDeDesconto; 
+    public CalculadoraDeTaxaDescontoService(){
+        metodosDeDesconto.add(new MetodoDescontoTaxaPorBairro());
+        metodosDeDesconto.add(new MetodoDescontoTipoItem());
+        metodosDeDesconto.add(new MetodoDescontoTaxaPorTipoCliente());
+        metodosDeDesconto.add(new MetodoDescontoValorPedido(200.00)); 
     }
     
     public void calcularDescontoTaxa(Pedido pedido){
-        
         for(IMetodoDescontoTaxaEntrega metodoDesconto : metodosDeDesconto){   
-      
-            CupomDescontoEntrega desconto = metodoDesconto.calcularDesconto(pedido);
-            
-            pedido.aplicarDesconto(desconto);
-            
-            // logica para o limite de desconto
-            if(pedido.getDescontoConcedido() > 10){
-                break;
-            }
+            metodoDesconto.calcularDesconto(pedido);
         }   
     }
+    
+    public void adicionarMetodoDesconto(IMetodoDescontoTaxaEntrega metodoDesconto){
+        metodosDeDesconto.add(metodoDesconto);
+    }
+    
 }

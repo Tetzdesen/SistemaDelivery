@@ -22,19 +22,18 @@ public class MetodoDescontoTaxaPorBairro implements IMetodoDescontoTaxaEntrega {
     
     @Override
     public CupomDescontoEntrega calcularDesconto(Pedido pedido) {
-        
         bairroCliente = pedido.getCliente().getBairro();
-        
+        double valorDesconto;
+
         if(seAplica(pedido)){
-            
-            if(pedido.getDescontoConcedido() > 10.00){ 
+            valorDesconto = descontosPorBairro.get(pedido.getCliente().getBairro());
+            if(pedido.getDescontoConcedido() + valorDesconto > 10.00){ 
                 return new CupomDescontoEntrega("Desconto parcial por bairro", 10.00 - pedido.getDescontoConcedido()); 
             }
             
-            return new CupomDescontoEntrega("Desconto total por bairro", descontosPorBairro.get(pedido.getCliente().getBairro()));
+            return new CupomDescontoEntrega("Desconto total por bairro", valorDesconto);
         }
-        return null;
-        
+        return null; 
     }
 
     @Override

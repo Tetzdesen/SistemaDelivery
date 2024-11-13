@@ -22,15 +22,16 @@ public class MetodoDescontoTaxaPorTipoCliente implements IMetodoDescontoTaxaEntr
     
     @Override
     public CupomDescontoEntrega calcularDesconto(Pedido pedido) {
+
         tipoCliente = pedido.getCliente().getTipo();
+        double valorDesconto;
         
         if(seAplica(pedido)){
-            
-            if(pedido.getDescontoConcedido() > 10.00){ 
+            valorDesconto = descontosPorTipoCliente.get(pedido.getCliente().getTipo());
+            if(pedido.getDescontoConcedido() + valorDesconto > 10.00){ 
                 return new CupomDescontoEntrega("Desconto parcial por tipo de cliente", 10.00 - pedido.getDescontoConcedido()); 
-            }
-            
-            return new CupomDescontoEntrega("Desconto total por tipo de cliente", descontosPorTipoCliente.get(pedido.getCliente().getTipo()));
+            }  
+            return new CupomDescontoEntrega("Desconto total por tipo de cliente", valorDesconto);
         }
         return null;
     }

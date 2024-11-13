@@ -1,6 +1,6 @@
+ufes\br\sistemadelivery\Principal.class
 ufes\br\model\Cliente.class
 ufes\br\model\Pedido.class
-ufes\br\sistemapedidos\Principal.class
 ufes\br\discount\MetodoDescontoValorPedido.class
 ufes\br\interfaces\IMetodoDescontoTaxaEntrega.class
 ufes\br\services\CalculadoraDeTaxaDescontoService.class

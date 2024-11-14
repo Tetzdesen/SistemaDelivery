@@ -5,10 +5,10 @@ package ufes.br.model;
  * @author tetzner
  */
 public class Item {
-    private String nome;
-    private int quantidade;
-    private double valorUnitario;
-    private String tipo;
+    private final String nome;
+    private final int quantidade;
+    private final double valorUnitario;
+    private final String tipo;
     
     public Item(String nome, int quantidade, double valorUnitario, String tipo){
         this.nome = nome;

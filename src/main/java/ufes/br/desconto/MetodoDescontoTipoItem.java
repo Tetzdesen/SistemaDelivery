@@ -13,7 +13,7 @@ import ufes.br.model.Pedido;
  * @author tetzner
  */
 public class MetodoDescontoTipoItem implements IMetodoDescontoTaxaEntrega {
-    private Map<String, Double> descontosPorTipoItem = new HashMap<>();
+    private final Map<String, Double> descontosPorTipoItem = new HashMap<>();
     
     public MetodoDescontoTipoItem(){
         descontosPorTipoItem.put("Alimentação", 5.00);
@@ -35,13 +35,10 @@ public class MetodoDescontoTipoItem implements IMetodoDescontoTaxaEntrega {
     }
 
     @Override
-    public boolean seAplica(Pedido pedido) {
-        
+    public boolean seAplica(Pedido pedido) {     
         for(Item item: pedido.getItens()){
-            descontosPorTipoItem.containsKey(item.getTipo());   
+            return descontosPorTipoItem.containsKey(item.getTipo());   
         }
-       
         return false;
     }
-    
 }

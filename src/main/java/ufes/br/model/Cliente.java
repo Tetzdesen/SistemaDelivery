@@ -5,12 +5,12 @@ package ufes.br.model;
  * @author tetzner
  */
 public class Cliente {
-    private String nome;
-    private String tipo;
+    private final String nome;
+    private final String tipo;
     private double fidelidade;
-    private String logradouro;
-    private String bairro;
-    private String cidade;
+    private final String logradouro;
+    private final String bairro;
+    private final String cidade;
     
     public Cliente(String nome, String tipo, double fidelidade, String logradouro, String bairro, String cidade){
         this.nome = nome;

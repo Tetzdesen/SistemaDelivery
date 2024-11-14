@@ -5,8 +5,8 @@ package ufes.br.model;
  * @author tetzner
  */
 public class CupomDescontoEntrega {
-    private String nomeMetodo;
-    private double valorDesconto;
+    private final String nomeMetodo;
+    private final double valorDesconto;
     
     public CupomDescontoEntrega(String nomeMetodo, double valorDesconto){
         this.nomeMetodo = nomeMetodo;

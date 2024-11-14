@@ -1,6 +1,5 @@
 package ufes.br.interfaces;
 
-import ufes.br.model.CupomDescontoEntrega;
 import ufes.br.model.Pedido;
 
 /**

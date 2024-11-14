@@ -13,10 +13,15 @@ public class Pedido {
     private double taxaEntrega;
     private LocalDate dataPedido;
     private Cliente cliente;
-    private List<Item> itens = new ArrayList<>();
-    private List<CupomDescontoEntrega> cuponsDescontoEntrega = new ArrayList<>();
+    private final List<Item> itens = new ArrayList<>();
+    private final List<CupomDescontoEntrega> cuponsDescontoEntrega = new ArrayList<>();
     
     public Pedido(double taxaEntrega, LocalDate dataPedido, Cliente cliente){
+        // verificar valores de taxaEntrega, dataPedido e cliente, se não atenderem lançar exceção
+        if(taxaEntrega < 0 || dataPedido == null || cliente == null){
+            throw new RuntimeException("");
+        }
+
         this.taxaEntrega = taxaEntrega;
         this.dataPedido = dataPedido;
         this.cliente = cliente;
@@ -33,7 +38,7 @@ public class Pedido {
             valorPedido += item.getValorTotal();
         }
         
-        return valorPedido;
+        return valorPedido + taxaEntrega;
     } 
     
     public Cliente getCliente(){

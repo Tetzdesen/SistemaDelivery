@@ -1,6 +1,6 @@
 package ufes.br.sistemadelivery;
 
-import ufes.br.services.CalculadoraDeTaxaDescontoService;
+import ufes.br.services.CalculadoraDescontoTaxaEntregaService;
 import ufes.br.model.Pedido;
 import ufes.br.model.Item;
 import ufes.br.model.Cliente;
@@ -24,9 +24,9 @@ public class Principal {
         pedido.adicionarItem(item3);
         pedido.adicionarItem(item4);
      
-        CalculadoraDeTaxaDescontoService calculadora = new CalculadoraDeTaxaDescontoService();
+        CalculadoraDescontoTaxaEntregaService calculadora = new CalculadoraDescontoTaxaEntregaService();
         
-        calculadora.calcularDescontoTaxa(pedido);
+        calculadora.calcularTaxaDesconto(pedido);
         
         double valorDesconto = pedido.getDescontoConcedido();
       

@@ -11,7 +11,7 @@ import ufes.br.model.Pedido;
  * @author tetzner
  */
 public class MetodoDescontoTaxaPorTipoCliente implements IMetodoDescontoTaxaEntrega {
-    private Map<String,Double> descontosPorTipoCliente = new HashMap<>();
+    private final Map<String,Double> descontosPorTipoCliente = new HashMap<>();
     
     public MetodoDescontoTaxaPorTipoCliente(){
         descontosPorTipoCliente.put("Ouro", 3.00);

@@ -10,7 +10,7 @@ import ufes.br.model.Pedido;
  */
 public class MetodoDescontoValorPedido implements IMetodoDescontoTaxaEntrega {
     private final double limiteValorPedido;
-    private static final double VALOR_DESCONTO = 5.00;
+    private static final double VALOR_DESCONTO = 0.15;
     
     public MetodoDescontoValorPedido(double limiteValorPedido){
         this.limiteValorPedido = limiteValorPedido;

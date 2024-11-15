@@ -18,10 +18,18 @@ public class Pedido {
     
     public Pedido(double taxaEntrega, LocalDate dataPedido, Cliente cliente){
         // verificar valores de taxaEntrega, dataPedido e cliente, se não atenderem lançar exceção
-        if(taxaEntrega < 0 || dataPedido == null || cliente == null){
-            throw new RuntimeException("");
+        if(taxaEntrega < 0){
+            throw new RuntimeException("Pedido não pode ser criado, taxa de entrega inválida. ");
         }
-
+        
+        if(dataPedido == null){
+            throw new RuntimeException("Pedido não pode ser criado, data do pedido inválida. ");
+        }
+        
+        if(cliente == null){
+             throw new RuntimeException("Pedido não pode ser criado, cliente inválido. ");
+        }
+        
         this.taxaEntrega = taxaEntrega;
         this.dataPedido = dataPedido;
         this.cliente = cliente;
@@ -68,11 +76,11 @@ public class Pedido {
             descontoConcedido += cupomDescontoEntrega.getValorDesconto();
         }
         
-        if(descontoConcedido > taxaEntrega){
+        if((taxaEntrega * descontoConcedido) > taxaEntrega){
             return taxaEntrega;
         }
         
-        return descontoConcedido;
+        return (taxaEntrega * descontoConcedido);
     }
     
     public List<CupomDescontoEntrega> getCuponsDescontoEntrega(){

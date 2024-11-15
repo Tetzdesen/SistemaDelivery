@@ -16,9 +16,9 @@ public class MetodoDescontoTipoItem implements IMetodoDescontoTaxaEntrega {
     private final Map<String, Double> descontosPorTipoItem = new HashMap<>();
     
     public MetodoDescontoTipoItem(){
-        descontosPorTipoItem.put("Alimentação", 5.00);
-        descontosPorTipoItem.put("Educação", 2.00);
-        descontosPorTipoItem.put("Lazer", 1.50);
+        descontosPorTipoItem.put("Alimentação", 0.05);
+        descontosPorTipoItem.put("Educação", 0.20);
+        descontosPorTipoItem.put("Lazer", 0.15);
     }
     
     @Override
@@ -30,7 +30,7 @@ public class MetodoDescontoTipoItem implements IMetodoDescontoTaxaEntrega {
             for(Item item : itens){
                 valorDesconto += descontosPorTipoItem.get(item.getTipo());
             }
-            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por tipo de item", valorDesconto)); 
+            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por tipo de item ", valorDesconto)); 
         }
     }
 

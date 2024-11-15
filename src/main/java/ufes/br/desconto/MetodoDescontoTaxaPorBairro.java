@@ -14,9 +14,9 @@ public class MetodoDescontoTaxaPorBairro implements IMetodoDescontoTaxaEntrega {
     private final Map<String, Double> descontosPorBairro = new HashMap<>();
     
     public MetodoDescontoTaxaPorBairro(){
-        descontosPorBairro.put("Centro", 2.00);
-        descontosPorBairro.put("Bela Vista", 3.00);
-        descontosPorBairro.put("Cidade Maravilhosa", 1.50);
+        descontosPorBairro.put("Centro", 0.20);
+        descontosPorBairro.put("Bela Vista", 0.30);
+        descontosPorBairro.put("Cidade Maravilhosa", 0.15);
     }
     
     @Override

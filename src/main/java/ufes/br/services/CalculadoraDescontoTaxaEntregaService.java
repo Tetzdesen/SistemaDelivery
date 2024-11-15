@@ -21,7 +21,7 @@ public class CalculadoraDescontoTaxaEntregaService {
         metodosDeDesconto.add(new MetodoDescontoTaxaPorBairro());
         metodosDeDesconto.add(new MetodoDescontoTipoItem());
         metodosDeDesconto.add(new MetodoDescontoTaxaPorTipoCliente());
-        metodosDeDesconto.add(new MetodoDescontoValorPedido(200.00)); 
+        metodosDeDesconto.add(new MetodoDescontoValorPedido(2000.00)); 
         metodosDeDesconto.add(new MetodoDescontoPorDataPedido()); 
     }
     

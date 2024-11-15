@@ -21,19 +21,16 @@ public class MetodoDescontoTaxaPorTipoCliente implements IMetodoDescontoTaxaEntr
     
     @Override
     public void calcularDesconto(Pedido pedido) {
-
-        String tipoCliente = pedido.getCliente().getTipo();
         double valorDesconto;
         
         if(seAplica(pedido)){
-            valorDesconto = descontosPorTipoCliente.get(tipoCliente);
+            valorDesconto = descontosPorTipoCliente.get(pedido.getCliente().getTipo());
             pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por tipo de cliente", valorDesconto));
         }
     }
 
     @Override
     public boolean seAplica(Pedido pedido) {
-        String tipoCliente = pedido.getCliente().getTipo();
-        return descontosPorTipoCliente.containsKey(tipoCliente);
+        return descontosPorTipoCliente.containsKey(pedido.getCliente().getTipo());
     }
 }

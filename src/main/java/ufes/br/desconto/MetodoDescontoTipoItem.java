@@ -24,10 +24,9 @@ public class MetodoDescontoTipoItem implements IMetodoDescontoTaxaEntrega {
     @Override
     public void calcularDesconto(Pedido pedido) {
         double valorDesconto = 0.0;
-        List<Item> itens = pedido.getItens();
         
         if(seAplica(pedido)){
-            for(Item item : itens){
+            for(Item item : pedido.getItens()){
                 valorDesconto += descontosPorTipoItem.get(item.getTipo());
             }
             pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por tipo de item ", valorDesconto)); 
@@ -35,10 +34,11 @@ public class MetodoDescontoTipoItem implements IMetodoDescontoTaxaEntrega {
     }
 
     @Override
-    public boolean seAplica(Pedido pedido) {     
+    public boolean seAplica(Pedido pedido) {    
+        boolean isPedidoAplicavel = false;
         for(Item item: pedido.getItens()){
-            return descontosPorTipoItem.containsKey(item.getTipo());   
+            isPedidoAplicavel = descontosPorTipoItem.containsKey(item.getTipo());   
         }
-        return false;
+        return isPedidoAplicavel;
     }
 }

@@ -32,8 +32,7 @@ public class MetodoDescontoPorDataPedido implements IMetodoDescontoTaxaEntrega {
 
     @Override
     public boolean seAplica(Pedido pedido) {
-      LocalDate dataAtualPedido = pedido.getDataPedido();
-      return descontosPorData.containsKey(dataAtualPedido);
+      return descontosPorData.containsKey(pedido.getDataPedido());
     }
     
 }

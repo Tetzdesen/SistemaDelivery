@@ -19,15 +19,15 @@ public class Pedido {
     public Pedido(double taxaEntrega, LocalDate dataPedido, Cliente cliente){
         // verificar valores de taxaEntrega, dataPedido e cliente, se não atenderem lançar exceção
         if(taxaEntrega < 0){
-            throw new RuntimeException("Pedido não pode ser criado, taxa de entrega inválida. ");
+            throw new RuntimeException("Taxa de entrega tem que ser maior que zero. ");
         }
         
         if(dataPedido == null){
-            throw new RuntimeException("Pedido não pode ser criado, data do pedido inválida. ");
+            throw new RuntimeException("Data do pedido obrigatório. ");
         }
         
         if(cliente == null){
-             throw new RuntimeException("Pedido não pode ser criado, cliente inválido. ");
+             throw new RuntimeException("Cliente obrigatório. ");
         }
         
         this.taxaEntrega = taxaEntrega;

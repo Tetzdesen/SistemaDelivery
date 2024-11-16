@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import ufes.br.exceptions.ClienteInvalidoException;
-import ufes.br.exceptions.CupomInvalidoException;
+import ufes.br.exceptions.CupomDescontoInvalidoException;
 import ufes.br.exceptions.DataPedidoInvalidaException;
-import ufes.br.exceptions.ItemInvalidoException;
-import ufes.br.exceptions.TaxaEntregaInvalidaException;
+import ufes.br.exceptions.ItemPedidoInvalidoException;
+import ufes.br.exceptions.TaxaEntregaPedidoInvalidaException;
 
 /**
  *
@@ -24,15 +24,15 @@ public class Pedido {
     public Pedido(double taxaEntrega, LocalDate dataPedido, Cliente cliente){
         // verificar valores de taxaEntrega, dataPedido e cliente, se não atenderem lançar exceção
         if(taxaEntrega < 0){
-            throw new TaxaEntregaInvalidaException();
+            throw new TaxaEntregaPedidoInvalidaException("Exceção - Taxa de entrega: " + taxaEntrega);
         }
         
         if(dataPedido == null){
-            throw new DataPedidoInvalidaException();
+            throw new DataPedidoInvalidaException("Exceção - Data do pedido: " + dataPedido);
         }
         
         if(cliente == null){
-             throw new ClienteInvalidoException();
+             throw new ClienteInvalidoException("Exceção - Cliente: " + cliente);
         }
         
         this.taxaEntrega = taxaEntrega;
@@ -42,7 +42,7 @@ public class Pedido {
     
     public void adicionarItem(Item item){
         // lançar exceção
-        if(item == null) throw new ItemInvalidoException(); 
+        if(item == null) throw new ItemPedidoInvalidoException("Exceção - Item: " + item); 
         itens.add(item);
     }
     
@@ -74,7 +74,7 @@ public class Pedido {
     
     public void aplicarDesconto(CupomDescontoEntrega cupomDesconto){
         // Lançar Exception
-        if(cupomDesconto == null) throw new CupomInvalidoException();
+        if(cupomDesconto == null) throw new CupomDescontoInvalidoException("Exceção - Cupom de desconto entrega: " + cupomDesconto);
         
         cuponsDescontoEntrega.add(cupomDesconto);
     }

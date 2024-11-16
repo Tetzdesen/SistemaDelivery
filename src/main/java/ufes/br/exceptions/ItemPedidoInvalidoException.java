@@ -8,8 +8,8 @@ package ufes.br.exceptions;
  *
  * @author tetzner
  */
-public class ClienteInvalidoException extends RuntimeException {
-    public ClienteInvalidoException(String mensagem){
+public class ItemPedidoInvalidoException extends RuntimeException {
+    public ItemPedidoInvalidoException(String mensagem){
         super(mensagem);
     }
 }

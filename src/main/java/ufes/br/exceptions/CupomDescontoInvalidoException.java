@@ -8,8 +8,8 @@ package ufes.br.exceptions;
  *
  * @author tetzner
  */
-public class ItemInvalidoException extends RuntimeException {
-    public ItemInvalidoException(){
-        super("Item de pedido inválido, um item deve existir. ");
+public class CupomDescontoInvalidoException extends RuntimeException {
+    public CupomDescontoInvalidoException(String mensagem){
+        super(mensagem);
     }
 }

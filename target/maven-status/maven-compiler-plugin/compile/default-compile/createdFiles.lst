@@ -1,9 +1,10 @@
-ufes\br\exceptions\ItemInvalidoException.class
+ufes\br\exceptions\TaxaEntregaPedidoInvalidaException.class
+ufes\br\exceptions\ItemPedidoInvalidoException.class
 ufes\br\exceptions\ClienteInvalidoException.class
 ufes\br\model\CupomDescontoEntrega.class
 ufes\br\model\Cliente.class
-ufes\br\exceptions\TaxaEntregaInvalidaException.class
 ufes\br\interfaces\IMetodoDescontoTaxaEntrega.class
-ufes\br\exceptions\CupomInvalidoException.class
+ufes\br\exceptions\PedidoInvalidoException.class
 ufes\br\exceptions\DataPedidoInvalidaException.class
+ufes\br\exceptions\CupomDescontoInvalidoException.class
 ufes\br\model\Item.class

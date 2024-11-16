@@ -31,7 +31,7 @@ public class CalculadoraDescontoTaxaEntregaService {
         }   
     }
     
-    public void addMetodo(IMetodoDescontoTaxaEntrega metodoDesconto){
+    public void adicionarMetodo(IMetodoDescontoTaxaEntrega metodoDesconto){
         metodosDeDesconto.add(metodoDesconto);
     }
     

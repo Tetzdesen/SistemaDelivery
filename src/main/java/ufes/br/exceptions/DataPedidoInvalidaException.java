@@ -8,8 +8,8 @@ package ufes.br.exceptions;
  *
  * @author tetzner
  */
-public class DataPedidoInvalidaException extends RuntimeException{
-    public DataPedidoInvalidaException(){
-        super("Data do pedido inválida. ");
+public class DataPedidoInvalidaException extends RuntimeException {
+    public DataPedidoInvalidaException(String mensagem){
+        super(mensagem);
     }
 }

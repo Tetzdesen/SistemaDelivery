@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import ufes.br.exceptions.ClienteInvalidoException;
+import ufes.br.exceptions.CupomInvalidoException;
+import ufes.br.exceptions.DataPedidoInvalidaException;
+import ufes.br.exceptions.ItemInvalidoException;
+import ufes.br.exceptions.TaxaEntregaInvalidaException;
 
 /**
  *
@@ -19,15 +24,15 @@ public class Pedido {
     public Pedido(double taxaEntrega, LocalDate dataPedido, Cliente cliente){
         // verificar valores de taxaEntrega, dataPedido e cliente, se não atenderem lançar exceção
         if(taxaEntrega < 0){
-            throw new RuntimeException("Taxa de entrega tem que ser maior que zero. ");
+            throw new TaxaEntregaInvalidaException();
         }
         
         if(dataPedido == null){
-            throw new RuntimeException("Data do pedido obrigatório. ");
+            throw new DataPedidoInvalidaException();
         }
         
         if(cliente == null){
-             throw new RuntimeException("Cliente obrigatório. ");
+             throw new ClienteInvalidoException();
         }
         
         this.taxaEntrega = taxaEntrega;
@@ -36,6 +41,8 @@ public class Pedido {
     }
     
     public void adicionarItem(Item item){
+        // lançar exceção
+        if(item == null) throw new ItemInvalidoException(); 
         itens.add(item);
     }
     
@@ -65,8 +72,11 @@ public class Pedido {
         return dataPedido;
     }
     
-    public void aplicarDesconto(CupomDescontoEntrega desconto){
-        cuponsDescontoEntrega.add(desconto);
+    public void aplicarDesconto(CupomDescontoEntrega cupomDesconto){
+        // Lançar Exception
+        if(cupomDesconto == null) throw new CupomInvalidoException();
+        
+        cuponsDescontoEntrega.add(cupomDesconto);
     }
 
     public double getDescontoConcedido(){

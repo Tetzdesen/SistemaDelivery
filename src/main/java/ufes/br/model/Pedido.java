@@ -56,7 +56,7 @@ public class Pedido {
             valorPedido += item.getValorTotal();
         }
 
-        return valorPedido + (taxaEntrega - getDescontoPercentualConcedido());
+        return valorPedido + getDescontoPercentualConcedido();
     } 
     
     public Cliente getCliente(){
@@ -89,7 +89,7 @@ public class Pedido {
             descontoConcedido += cupomDescontoEntrega.getValorDesconto();
         }
     
-        return Math.min((taxaEntrega * descontoConcedido), taxaEntrega);
+        return Math.min((taxaEntrega - (taxaEntrega * descontoConcedido)), taxaEntrega);
     }
     
     public List<CupomDescontoEntrega> getCuponsDescontoEntrega(){

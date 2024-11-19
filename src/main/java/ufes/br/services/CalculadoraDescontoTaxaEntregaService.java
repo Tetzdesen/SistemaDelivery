@@ -15,13 +15,14 @@ import ufes.br.desconto.MetodoDescontoValorPedido;
  * @author tetzner
  */
 public class CalculadoraDescontoTaxaEntregaService {
-    private final List<IMetodoDescontoTaxaEntrega> metodosDeDesconto = new ArrayList<>();
+    private final List<IMetodoDescontoTaxaEntrega> metodosDeDesconto;
     
     public CalculadoraDescontoTaxaEntregaService(){
+        metodosDeDesconto = new ArrayList<>();
+        metodosDeDesconto.add(new MetodoDescontoValorPedido(2000.00)); 
         metodosDeDesconto.add(new MetodoDescontoTaxaPorBairro());
         metodosDeDesconto.add(new MetodoDescontoTipoItem());
         metodosDeDesconto.add(new MetodoDescontoTaxaPorTipoCliente());
-        metodosDeDesconto.add(new MetodoDescontoValorPedido(2000.00)); 
         metodosDeDesconto.add(new MetodoDescontoPorDataPedido()); 
     }
     

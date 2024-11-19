@@ -11,9 +11,10 @@ import ufes.br.model.Pedido;
  * @author tetzner
  */
 public class MetodoDescontoTaxaPorBairro implements IMetodoDescontoTaxaEntrega {
-    private final Map<String, Double> descontosPorBairro = new HashMap<>();
-    
+    // private final Map<String, Double> descontosPorBairro = new HashMap<>();
+    private final Map<String, Double> descontosPorBairro;
     public MetodoDescontoTaxaPorBairro(){
+        this.descontosPorBairro = new HashMap<>();
         descontosPorBairro.put("Centro", 0.20);
         descontosPorBairro.put("Bela Vista", 0.30);
         descontosPorBairro.put("Cidade Maravilhosa", 0.15);

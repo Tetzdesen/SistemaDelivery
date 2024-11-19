@@ -25,7 +25,8 @@ public class MetodoDescontoValorPedido implements IMetodoDescontoTaxaEntrega {
 
     @Override
     public boolean seAplica(Pedido pedido) {
-            return (pedido.getValorPedido() - pedido.getTaxaEntrega()) > limiteValorPedido;
+             return (pedido.getValorPedido() - (pedido.getTaxaEntrega() - pedido.getDescontoPercentualConcedido()))  > limiteValorPedido;
+            //return (pedido.getValorPedido() - pedido.getTaxaEntrega()) > limiteValorPedido;
     }
  }
     

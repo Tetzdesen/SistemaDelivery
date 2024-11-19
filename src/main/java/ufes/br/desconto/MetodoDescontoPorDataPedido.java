@@ -15,9 +15,11 @@ import ufes.br.model.Pedido;
 
 public class MetodoDescontoPorDataPedido implements IMetodoDescontoTaxaEntrega {
 
-    private final Map<LocalDate,Double> descontosPorData = new HashMap<>();
+   // private final Map<LocalDate,Double> descontosPorData = new HashMap<>();
+    private final Map<LocalDate,Double> descontosPorData;
     
     public MetodoDescontoPorDataPedido(){   
+        this.descontosPorData = new HashMap<>();
         descontosPorData.put(LocalDate.of(2025, Month.JANUARY, 1), 0.10);
         descontosPorData.put(LocalDate.of(2024, Month.OCTOBER, 12), 0.15);
         descontosPorData.put(LocalDate.of(2024, Month.DECEMBER, 25), 0.20);

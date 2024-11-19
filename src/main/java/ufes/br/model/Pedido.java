@@ -18,8 +18,8 @@ public class Pedido {
     private double taxaEntrega;
     private LocalDate dataPedido;
     private Cliente cliente;
-    private final List<Item> itens = new ArrayList<>();
-    private final List<CupomDescontoEntrega> cuponsDescontoEntrega = new ArrayList<>();
+    private final List<Item> itens;
+    private final List<CupomDescontoEntrega> cuponsDescontoEntrega;
     
     public Pedido(double taxaEntrega, LocalDate dataPedido, Cliente cliente){
         // verificar valores de taxaEntrega, dataPedido e cliente, se não atenderem lançar exceção
@@ -34,6 +34,9 @@ public class Pedido {
         if(cliente == null){
              throw new ClienteInvalidoException("Exceção - Cliente: " + cliente);
         }
+        
+        this.itens = new ArrayList<>();
+        this.cuponsDescontoEntrega = new ArrayList<>();
         
         this.taxaEntrega = taxaEntrega;
         this.dataPedido = dataPedido;
@@ -52,8 +55,8 @@ public class Pedido {
         for(Item item : itens){
             valorPedido += item.getValorTotal();
         }
-        
-        return valorPedido + taxaEntrega;
+
+        return valorPedido + (taxaEntrega - getDescontoPercentualConcedido());
     } 
     
     public Cliente getCliente(){
@@ -79,18 +82,14 @@ public class Pedido {
         cuponsDescontoEntrega.add(cupomDesconto);
     }
 
-    public double getDescontoConcedido(){
+    public double getDescontoPercentualConcedido(){
         double descontoConcedido = 0.0;
         
         for(CupomDescontoEntrega cupomDescontoEntrega: cuponsDescontoEntrega){
             descontoConcedido += cupomDescontoEntrega.getValorDesconto();
         }
-        
-        if((taxaEntrega * descontoConcedido) > taxaEntrega){
-            return taxaEntrega;
-        }
-        
-        return (taxaEntrega * descontoConcedido);
+    
+        return Math.min((taxaEntrega * descontoConcedido), taxaEntrega);
     }
     
     public List<CupomDescontoEntrega> getCuponsDescontoEntrega(){

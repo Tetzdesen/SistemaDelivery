@@ -50,13 +50,14 @@ public class Pedido {
     }
     
     public double getValorPedido(){
-        double valorPedido = 0.0;
+      //  double valorPedido = 0.0;
         
-        for(Item item : itens){
-            valorPedido += item.getValorTotal();
-        }
+      //  for(Item item : itens){
+        //    valorPedido += item.getValorTotal();
+         //   valorPedido += itens.stream().mapToDouble(Item::getValorTotal).sum();
+       // }
 
-        return valorPedido + getDescontoPercentualConcedido();
+        return itens.stream().mapToDouble(Item::getValorTotal).sum() + getDescontoPercentualConcedido();
     } 
     
     public Cliente getCliente(){
@@ -83,13 +84,13 @@ public class Pedido {
     }
 
     public double getDescontoPercentualConcedido(){
-        double descontoConcedido = 0.0;
+       // double descontoConcedido = 0.0;
         
-        for(CupomDescontoEntrega cupomDescontoEntrega: cuponsDescontoEntrega){
-            descontoConcedido += cupomDescontoEntrega.getValorDesconto();
-        }
+       // for(CupomDescontoEntrega cupomDescontoEntrega: cuponsDescontoEntrega){
+        //    descontoConcedido += cupomDescontoEntrega.getValorDesconto();
+       // }
     
-        return Math.min((taxaEntrega - (taxaEntrega * descontoConcedido)), taxaEntrega);
+        return Math.min((taxaEntrega - (taxaEntrega *  cuponsDescontoEntrega.stream().mapToDouble(CupomDescontoEntrega::getValorDesconto).sum())), taxaEntrega);
     }
     
     public List<CupomDescontoEntrega> getCuponsDescontoEntrega(){

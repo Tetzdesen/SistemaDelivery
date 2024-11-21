@@ -23,12 +23,13 @@ public class MetodoDescontoTipoItem implements IMetodoDescontoTaxaEntrega {
     
     @Override
     public void calcularDesconto(Pedido pedido) {
-        double valorDesconto = 0.0;
+        double valorDesconto = 0;
         
         if(seAplica(pedido)){
             for(Item item : pedido.getItens()){
-                valorDesconto += descontosPorTipoItem.get(item.getTipo());
+               valorDesconto += descontosPorTipoItem.get(item.getTipo());
             }
+            
             pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por tipo de item ", valorDesconto)); 
         }
     }

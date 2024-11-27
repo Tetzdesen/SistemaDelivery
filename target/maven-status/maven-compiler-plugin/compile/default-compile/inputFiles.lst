@@ -1,5 +1,6 @@
 C:\Users\tetzner\SistemaDelivery\src\main\java\ufes\br\desconto\MetodoDescontoValorPedido.java
 C:\Users\tetzner\SistemaDelivery\src\main\java\ufes\br\desconto\MetodoDescontoTaxaPorBairro.java
+C:\Users\tetzner\SistemaDelivery\src\main\java\ufes\br\model\EstadoPedido.java
 C:\Users\tetzner\SistemaDelivery\src\main\java\ufes\br\desconto\MetodoDescontoTipoItem.java
 C:\Users\tetzner\SistemaDelivery\src\main\java\ufes\br\estadopedido\EstadoEmPreparo.java
 C:\Users\tetzner\SistemaDelivery\src\main\java\ufes\br\services\CalculadoraDescontoTaxaEntregaService.java
@@ -8,7 +9,6 @@ C:\Users\tetzner\SistemaDelivery\src\main\java\ufes\br\sistemadelivery\Principal
 C:\Users\tetzner\SistemaDelivery\src\main\java\ufes\br\desconto\MetodoDescontoTaxaPorTipoCliente.java
 C:\Users\tetzner\SistemaDelivery\src\main\java\ufes\br\estadopedido\EstadoAberto.java
 C:\Users\tetzner\SistemaDelivery\src\main\java\ufes\br\interfaces\IMetodoDescontoTaxaEntrega.java
-C:\Users\tetzner\SistemaDelivery\src\main\java\ufes\br\estadopedido\EstadoPedido.java
 C:\Users\tetzner\SistemaDelivery\src\main\java\ufes\br\model\Cliente.java
 C:\Users\tetzner\SistemaDelivery\src\main\java\ufes\br\model\Pedido.java
 C:\Users\tetzner\SistemaDelivery\src\main\java\ufes\br\model\CupomDescontoEntrega.java

@@ -1,5 +1,6 @@
 package ufes.br.estadopedido;
 
+import ufes.br.model.EstadoPedido;
 import ufes.br.model.Pedido;
 
 /**

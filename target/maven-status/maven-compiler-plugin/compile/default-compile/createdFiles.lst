@@ -4,6 +4,7 @@ ufes\br\services\CalculadoraDescontoTaxaEntregaService.class
 ufes\br\services\ControladoraEstadoPedidoService.class
 ufes\br\estadopedido\EstadoEmPreparo.class
 ufes\br\model\CupomDescontoEntrega.class
+ufes\br\model\EstadoPedido.class
 ufes\br\model\HistoricoPedido.class
 ufes\br\desconto\MetodoDescontoTaxaPorTipoCliente.class
 ufes\br\sistemadelivery\Principal.class
@@ -12,7 +13,6 @@ ufes\br\model\Pedido.class
 ufes\br\desconto\MetodoDescontoTaxaPorBairro.class
 ufes\br\estadopedido\EstadoAberto.class
 ufes\br\interfaces\IMetodoDescontoTaxaEntrega.class
-ufes\br\estadopedido\EstadoPedido.class
 ufes\br\desconto\MetodoDescontoPorDataPedido.class
 ufes\br\desconto\MetodoDescontoTipoItem.class
 ufes\br\model\Item.class

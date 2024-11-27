@@ -1,6 +1,5 @@
 package ufes.br.model;
 
-import ufes.br.estadopedido.EstadoPedido;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;

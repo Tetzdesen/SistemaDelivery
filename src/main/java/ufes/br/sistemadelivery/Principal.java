@@ -26,11 +26,11 @@ public class Principal {
         pedido.adicionarItem(item3);
         pedido.adicionarItem(item4);
         
-     //   ControladoraEstadoPedidoService controladoraEstado = new ControladoraEstadoPedidoService(pedido);
         pedido.preparar();
-          System.out.println(pedido);
+        System.out.println(pedido);
         pedido.finalizarPreparo();
-      System.out.println(pedido);
+        System.out.println(pedido);
+        
         CalculadoraDescontoTaxaEntregaService calculadora = new CalculadoraDescontoTaxaEntregaService();
         
         System.out.println(pedido.getValorPedido());

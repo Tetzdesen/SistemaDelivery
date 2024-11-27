@@ -5,7 +5,6 @@
 package ufes.br.model;
 
 import java.time.LocalDateTime;
-import ufes.br.estadopedido.EstadoPedido;
 
 /**
  *

@@ -4,7 +4,7 @@
  */
 package ufes.br.services;
 import ufes.br.estadopedido.EstadoAberto;
-import ufes.br.estadopedido.EstadoPedido;
+import ufes.br.model.EstadoPedido;
 import ufes.br.model.Pedido;
 
 /**

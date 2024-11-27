@@ -38,7 +38,7 @@ public class Pedido {
         this.cliente = cliente;
         this.itens = new ArrayList<>();
         this.cuponsDescontoEntrega = new ArrayList<>();
-        estadoPedido = new EstadoAberto();
+        estadoPedido = new EstadoAberto(this);
     }
 
     public EstadoPedido getEstadoPedido() {
@@ -87,6 +87,18 @@ public class Pedido {
     
     public List<CupomDescontoEntrega> getCuponsDescontoEntrega(){
        return Collections.unmodifiableList(cuponsDescontoEntrega);
+    }
+    
+    public void preparar(){
+        estadoPedido.preparar();
+    }
+    
+    public void finalizarPreparo(){
+       estadoPedido.finalizarPreparo();
+    }
+    
+    public void entregar(){
+        estadoPedido.entregar();
     }
 
     @Override

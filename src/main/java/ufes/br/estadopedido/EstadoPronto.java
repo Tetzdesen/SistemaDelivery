@@ -1,27 +1,32 @@
 package ufes.br.estadopedido;
 
-import ufes.br.interfaces.IMetodoProcessamento;
 import ufes.br.model.Pedido;
 
 /**
  *
  * @author tetzner
  */
-public class EstadoPronto extends EstadoPedido implements IMetodoProcessamento {
+public class EstadoPronto extends EstadoPedido {
+
+    public EstadoPronto(Pedido pedido) {
+        super(pedido);
+        System.out.println("Pedido entregue. ");
+    }
 
     @Override
-    public void preparar(Pedido pedido) {
+    public void preparar() {
         throw new RuntimeException("Pedido ja preparado. "); 
     }
 
     @Override
-    public void finalizarPreparo(Pedido pedido) {
+    public void finalizarPreparo() {
         throw new RuntimeException("Pedido ja finalizado. "); 
     }
 
     @Override
-    public void entregar(Pedido pedido) {
-        pedido.setEstadoPedido(new EstadoEntregue());
+    public void entregar() {
+        pedido.setEstadoPedido(new EstadoEntregue(pedido));
     }
+
 
 }

@@ -1,26 +1,29 @@
 package ufes.br.estadopedido;
 
-import ufes.br.interfaces.IMetodoProcessamento;
 import ufes.br.model.Pedido;
 
 /**
  *
  * @author tetzner
  */
-public class EstadoAberto extends EstadoPedido implements IMetodoProcessamento {
+public class EstadoAberto extends EstadoPedido {
 
-    @Override
-    public void preparar(Pedido pedido) {
-        pedido.setEstadoPedido(new EstadoEmPreparo());
+    public EstadoAberto(Pedido pedido) {
+        super(pedido);
     }
 
     @Override
-    public void finalizarPreparo(Pedido pedido) {
+    public void preparar() {
+        pedido.setEstadoPedido(new EstadoEmPreparo(pedido));
+    }
+
+    @Override
+    public void finalizarPreparo() {
         throw new RuntimeException("Pedido nao comecou a ser preparado. ");
     }
 
     @Override
-    public void entregar(Pedido pedido) {
+    public void entregar() {
         throw new RuntimeException("Pedido ainda não finalizado ");
     }
     

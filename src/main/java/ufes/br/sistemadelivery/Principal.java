@@ -5,7 +5,7 @@ import ufes.br.model.Pedido;
 import ufes.br.model.Item;
 import ufes.br.model.Cliente;
 import java.time.LocalDate;
-import ufes.br.services.ControladoraMetodoProcessamentoService;
+import ufes.br.services.ControladoraEstadoPedidoService;
 
 /**
  *
@@ -26,11 +26,10 @@ public class Principal {
         pedido.adicionarItem(item3);
         pedido.adicionarItem(item4);
         
-        ControladoraMetodoProcessamentoService controladoraEstado = new ControladoraMetodoProcessamentoService();
-        System.out.println(pedido);
-        controladoraEstado.preparar(pedido);
+     //   ControladoraEstadoPedidoService controladoraEstado = new ControladoraEstadoPedidoService(pedido);
+        pedido.preparar();
           System.out.println(pedido);
-        controladoraEstado.finalizarPreparo(pedido);
+        pedido.finalizarPreparo();
       System.out.println(pedido);
         CalculadoraDescontoTaxaEntregaService calculadora = new CalculadoraDescontoTaxaEntregaService();
         
@@ -42,7 +41,7 @@ public class Principal {
         System.out.println(pedido.getValorPedido());
         System.out.println("Desconto Concedido: " + valorDesconto);
         
-        controladoraEstado.entregar(pedido);
+        pedido.entregar();
           System.out.println(pedido);
     }   
 }

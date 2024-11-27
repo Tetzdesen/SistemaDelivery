@@ -15,10 +15,10 @@ import ufes.br.model.Pedido;
  *
  * @author tetzner
  */
-public class ControladoraEstadoPedidoService {
+public class ControladoraMetodoProcessamentoService {
     private IMetodoProcessamento estadoPedido;
     
-    public ControladoraEstadoPedidoService(){
+    public ControladoraMetodoProcessamentoService(){
         estadoPedido = new EstadoAberto();
     }
    

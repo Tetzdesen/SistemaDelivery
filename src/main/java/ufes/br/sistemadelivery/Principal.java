@@ -5,7 +5,7 @@ import ufes.br.model.Pedido;
 import ufes.br.model.Item;
 import ufes.br.model.Cliente;
 import java.time.LocalDate;
-import ufes.br.services.ControladoraEstadoPedidoService;
+import ufes.br.services.ControladoraMetodoProcessamentoService;
 
 /**
  *
@@ -26,7 +26,7 @@ public class Principal {
         pedido.adicionarItem(item3);
         pedido.adicionarItem(item4);
         
-        ControladoraEstadoPedidoService controladoraEstado = new ControladoraEstadoPedidoService();
+        ControladoraMetodoProcessamentoService controladoraEstado = new ControladoraMetodoProcessamentoService();
         System.out.println(pedido);
         controladoraEstado.preparar(pedido);
           System.out.println(pedido);

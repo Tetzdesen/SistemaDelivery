@@ -4,7 +4,7 @@ package ufes.br.model;
  *
  * @author tetzner
  */
-public class Cliente {
+public final class Cliente {
     private final String nome;
     private final String tipo;
     private double fidelidade;

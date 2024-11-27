@@ -4,7 +4,7 @@ package ufes.br.model;
  *
  * @author tetzner
  */
-public class Item {
+public final class Item {
     private final String nome;
     private final int quantidade;
     private final double valorUnitario;

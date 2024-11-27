@@ -1,14 +1,11 @@
 package ufes.br.model;
 
+import ufes.br.estadopedido.EstadoPedido;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import ufes.br.exceptions.ClienteInvalidoException;
-import ufes.br.exceptions.CupomDescontoInvalidoException;
-import ufes.br.exceptions.DataPedidoInvalidaException;
-import ufes.br.exceptions.ItemPedidoInvalidoException;
-import ufes.br.exceptions.TaxaEntregaPedidoInvalidaException;
+import ufes.br.estadopedido.EstadoAberto;
 
 /**
  *
@@ -20,44 +17,46 @@ public class Pedido {
     private Cliente cliente;
     private final List<Item> itens;
     private final List<CupomDescontoEntrega> cuponsDescontoEntrega;
+    private EstadoPedido estadoPedido;
     
     public Pedido(double taxaEntrega, LocalDate dataPedido, Cliente cliente){
         // verificar valores de taxaEntrega, dataPedido e cliente, se não atenderem lançar exceção
         if(taxaEntrega < 0){
-            throw new TaxaEntregaPedidoInvalidaException("Exceção - Taxa de entrega: " + taxaEntrega);
+            throw new IllegalArgumentException("Exceção - Taxa de entrega: " + taxaEntrega);
         }
         
         if(dataPedido == null){
-            throw new DataPedidoInvalidaException("Exceção - Data do pedido: " + dataPedido);
+            throw new IllegalArgumentException("Exceção - Data do pedido: " + dataPedido);
         }
         
         if(cliente == null){
-             throw new ClienteInvalidoException("Exceção - Cliente: " + cliente);
+             throw new IllegalArgumentException("Exceção - Cliente: " + cliente);
         }
-        
-        this.itens = new ArrayList<>();
-        this.cuponsDescontoEntrega = new ArrayList<>();
         
         this.taxaEntrega = taxaEntrega;
         this.dataPedido = dataPedido;
         this.cliente = cliente;
+        this.itens = new ArrayList<>();
+        this.cuponsDescontoEntrega = new ArrayList<>();
+        estadoPedido = new EstadoAberto();
+    }
+
+    public EstadoPedido getEstadoPedido() {
+        return estadoPedido;
+    }
+
+    public void setEstadoPedido(EstadoPedido estado) {
+        this.estadoPedido = estado;
     }
     
     public void adicionarItem(Item item){
-        // lançar exceção
-        if(item == null) throw new ItemPedidoInvalidoException("Exceção - Item: " + item); 
+        if(item == null) throw new IllegalArgumentException("Exceção - Item: " + item); 
         itens.add(item);
     }
     
     public double getValorPedido(){
-      //  double valorPedido = 0.0;
-        
-      //  for(Item item : itens){
-        //    valorPedido += item.getValorTotal();
-         //   valorPedido += itens.stream().mapToDouble(Item::getValorTotal).sum();
-       // }
-
-        return itens.stream().mapToDouble(Item::getValorTotal).sum() + getDescontoPercentualConcedido();
+        double valorPedido = itens.stream().mapToDouble(Item::getValorTotal).sum();
+        return  valorPedido + getDescontoPercentualConcedido();
     } 
     
     public Cliente getCliente(){
@@ -77,20 +76,13 @@ public class Pedido {
     }
     
     public void aplicarDesconto(CupomDescontoEntrega cupomDesconto){
-        // Lançar Exception
-        if(cupomDesconto == null) throw new CupomDescontoInvalidoException("Exceção - Cupom de desconto entrega: " + cupomDesconto);
-        
+        if(cupomDesconto == null) throw new IllegalArgumentException("Exceção - Cupom de desconto entrega: " + cupomDesconto);  
         cuponsDescontoEntrega.add(cupomDesconto);
     }
 
     public double getDescontoPercentualConcedido(){
-       // double descontoConcedido = 0.0;
-        
-       // for(CupomDescontoEntrega cupomDescontoEntrega: cuponsDescontoEntrega){
-        //    descontoConcedido += cupomDescontoEntrega.getValorDesconto();
-       // }
-    
-        return Math.min((taxaEntrega - (taxaEntrega *  cuponsDescontoEntrega.stream().mapToDouble(CupomDescontoEntrega::getValorDesconto).sum())), taxaEntrega);
+       double descontoConcedido = cuponsDescontoEntrega.stream().mapToDouble(CupomDescontoEntrega::getValorDesconto).sum();
+       return Math.min((taxaEntrega - (taxaEntrega *  descontoConcedido)), taxaEntrega);
     }
     
     public List<CupomDescontoEntrega> getCuponsDescontoEntrega(){
@@ -99,6 +91,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" + "taxaEntrega=" + taxaEntrega + ", cliente=" + cliente + ", itens=" + itens + ", cuponsDescontoEntrega=" + cuponsDescontoEntrega + '}';
+        return "Pedido{" + "taxaEntrega=" + taxaEntrega + ", dataPedido=" + dataPedido + ", cliente=" + cliente + ", itens=" + itens + ", cuponsDescontoEntrega=" + cuponsDescontoEntrega + ", estadoPedido=" + estadoPedido + '}';
     }
+
 }

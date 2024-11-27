@@ -5,6 +5,7 @@ import ufes.br.model.Pedido;
 import ufes.br.model.Item;
 import ufes.br.model.Cliente;
 import java.time.LocalDate;
+import ufes.br.services.ControladoraEstadoPedidoService;
 
 /**
  *
@@ -24,16 +25,25 @@ public class Principal {
        // pedido.adicionarItem(item2);
         pedido.adicionarItem(item3);
         pedido.adicionarItem(item4);
-     
+        
+        ControladoraEstadoPedidoService controladoraEstado = new ControladoraEstadoPedidoService();
+        System.out.println(pedido);
+        controladoraEstado.preparar(pedido);
+          System.out.println(pedido);
+        controladoraEstado.finalizarPreparo(pedido);
+      System.out.println(pedido);
         CalculadoraDescontoTaxaEntregaService calculadora = new CalculadoraDescontoTaxaEntregaService();
         
         System.out.println(pedido.getValorPedido());
         calculadora.calcularTaxaDesconto(pedido);
         
         double valorDesconto = pedido.getDescontoPercentualConcedido();
-      
+
         System.out.println(pedido.getValorPedido());
         System.out.println("Desconto Concedido: " + valorDesconto);
+        
+        controladoraEstado.entregar(pedido);
+          System.out.println(pedido);
     }   
 }
 

@@ -4,7 +4,7 @@ package ufes.br.model;
  *
  * @author tetzner
  */
-public class CupomDescontoEntrega {
+public final class CupomDescontoEntrega {
     private final String nomeMetodo;
     private final double valorDesconto;
     

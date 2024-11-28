@@ -5,7 +5,6 @@ import ufes.br.model.Pedido;
 import ufes.br.model.Item;
 import ufes.br.model.Cliente;
 import java.time.LocalDate;
-import ufes.br.services.ControladoraEstadoPedidoService;
 
 /**
  *

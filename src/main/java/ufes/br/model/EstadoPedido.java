@@ -4,9 +4,6 @@
  */
 package ufes.br.model;
 
-import java.util.logging.Logger;
-import ufes.br.model.Pedido;
-
 /**
  *
  * @author tetzner

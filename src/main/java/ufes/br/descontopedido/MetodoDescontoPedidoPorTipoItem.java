@@ -1,9 +1,12 @@
-package ufes.br.desconto;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package ufes.br.descontopedido;
 
 import java.util.HashMap;
 import java.util.Map;
-import ufes.br.model.CupomDescontoEntrega;
-import ufes.br.interfaces.IMetodoDescontoTaxaEntrega;
+import ufes.br.model.CupomDescontoPedido;
 import ufes.br.model.Item;
 import ufes.br.model.Pedido;
 
@@ -11,35 +14,37 @@ import ufes.br.model.Pedido;
  *
  * @author tetzner
  */
-public class MetodoDescontoTipoItem implements IMetodoDescontoTaxaEntrega {
+public class MetodoDescontoPedidoPorTipoItem implements IMetodoDescontoPedido {
+    
     private final Map<String, Double> descontosPorTipoItem;
     
-    public MetodoDescontoTipoItem(){
+    public MetodoDescontoPedidoPorTipoItem(){
         descontosPorTipoItem = new HashMap<>();
         descontosPorTipoItem.put("Alimentação", 0.05);
         descontosPorTipoItem.put("Educação", 0.20);
         descontosPorTipoItem.put("Lazer", 0.15);
     }
-    
+            
     @Override
-    public void calcularDesconto(Pedido pedido) {
-        double valorDesconto = 0;
+    public void aplicarDesconto(Pedido pedido) {
+         double valorDesconto = 0.0;
         
         if(seAplica(pedido)){
             for(Item item : pedido.getItens()){
                valorDesconto += descontosPorTipoItem.get(item.getTipo());
             }
             
-            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por tipo de item ", valorDesconto)); 
+            pedido.aplicarDescontoTaxaEntrega(new CupomDescontoPedido("Desconto no pedido por tipo de item ", valorDesconto, pedido.getValorPedido())); 
         }
     }
 
     @Override
-    public boolean seAplica(Pedido pedido) {    
+    public boolean seAplica(Pedido pedido) {
         boolean isPedidoAplicavel = false;
         for(Item item: pedido.getItens()){
             isPedidoAplicavel = descontosPorTipoItem.containsKey(item.getTipo());   
         }
         return isPedidoAplicavel;
     }
+    
 }

@@ -1,4 +1,4 @@
-package ufes.br.desconto;
+package ufes.br.descontotaxaentrega;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -14,8 +14,6 @@ import ufes.br.model.Pedido;
  */
 
 public class MetodoDescontoPorDataPedido implements IMetodoDescontoTaxaEntrega {
-
-   // private final Map<LocalDate,Double> descontosPorData = new HashMap<>();
     private final Map<LocalDate,Double> descontosPorData;
     
     public MetodoDescontoPorDataPedido(){   
@@ -28,7 +26,7 @@ public class MetodoDescontoPorDataPedido implements IMetodoDescontoTaxaEntrega {
     @Override
     public void calcularDesconto(Pedido pedido) {
         if(seAplica(pedido)){
-            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto pela data do pedido", descontosPorData.get(pedido.getDataPedido())));
+            pedido.aplicarDescontoTaxaEntrega(new CupomDescontoEntrega("Desconto pela data do pedido", descontosPorData.get(pedido.getDataPedido()), pedido.getTaxaEntrega()));
         }
     }
 

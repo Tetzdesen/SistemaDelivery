@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import ufes.br.interfaces.IMetodoDescontoTaxaEntrega;
 import ufes.br.model.Pedido;
 import java.util.List;
-import ufes.br.desconto.MetodoDescontoPorDataPedido;
-import ufes.br.desconto.MetodoDescontoTaxaPorBairro;
-import ufes.br.desconto.MetodoDescontoTaxaPorTipoCliente;
-import ufes.br.desconto.MetodoDescontoTipoItem;
-import ufes.br.desconto.MetodoDescontoValorPedido;
+import ufes.br.descontotaxaentrega.MetodoDescontoPorDataPedido;
+import ufes.br.descontotaxaentrega.MetodoDescontoTaxaPorBairro;
+import ufes.br.descontotaxaentrega.MetodoDescontoTaxaPorTipoCliente;
+import ufes.br.descontotaxaentrega.MetodoDescontoTipoItem;
+import ufes.br.descontotaxaentrega.MetodoDescontoValorPedido;
 
 /**
  *

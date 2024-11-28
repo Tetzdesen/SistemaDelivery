@@ -1,7 +1,8 @@
-package ufes.br.desconto;
+package ufes.br.descontotaxaentrega;
 
-import ufes.br.model.CupomDescontoEntrega;
+import ufes.br.model.CupomDesconto;
 import ufes.br.interfaces.IMetodoDescontoTaxaEntrega;
+import ufes.br.model.CupomDescontoEntrega;
 import ufes.br.model.Pedido;
 
 /**
@@ -19,7 +20,7 @@ public class MetodoDescontoValorPedido implements IMetodoDescontoTaxaEntrega {
     @Override
     public void calcularDesconto(Pedido pedido) { 
         if(seAplica(pedido)){         
-            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por valor pedido", VALOR_DESCONTO));
+            pedido.aplicarDescontoTaxaEntrega(new CupomDescontoEntrega("Desconto por valor pedido", VALOR_DESCONTO, pedido.getTaxaEntrega()));
         }
     }
 

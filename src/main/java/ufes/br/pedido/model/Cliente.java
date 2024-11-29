@@ -13,6 +13,9 @@ public final class Cliente {
     private final String cidade;
     
     public Cliente(String nome, String tipo, double fidelidade, String logradouro, String bairro, String cidade){
+        if(nome == null || tipo == null || fidelidade < 0.0 || logradouro == null || bairro == null || cidade == null){
+            throw new IllegalArgumentException("Dados do cliente invalidos");
+        }
         this.nome = nome;
         this.tipo = tipo;
         this.fidelidade = fidelidade;

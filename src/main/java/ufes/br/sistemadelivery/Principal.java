@@ -34,7 +34,7 @@ public class Principal {
         System.out.println("Valor do pedido atual: R$ " + pedido.getValorPedido());
         
         calculadora.calcularTaxaDesconto(pedido);
-        
+          System.out.println(pedido);
         double valorDesconto = pedido.getDescontoTaxaEntregaConcedido();
 
         System.out.println("Desconto na taxa de entrega concedida: R$ " + valorDesconto);

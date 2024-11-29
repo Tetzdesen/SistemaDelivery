@@ -14,6 +14,9 @@ public class CupomDescontoPedido{
     private final double valorPedido;
     
     public CupomDescontoPedido(String nomeMetodo, double valorDesconto, double valorPedido){
+         if(nomeMetodo == null || valorDesconto < 0.0 || valorPedido < 0.0){
+            throw new IllegalArgumentException("Dados do cupom de desconto pedido invalidos");
+        }
         this.nomeMetodo = nomeMetodo;
         this.valorDesconto = valorDesconto;
         this.valorPedido = valorPedido;

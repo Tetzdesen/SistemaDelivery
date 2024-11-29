@@ -28,7 +28,10 @@ public class GestorDeDescontoPedidoService {
     }
     
     public void calcularTaxaDescontoPedido(Pedido pedido){
-   
+        if(pedido == null){
+            throw new IllegalArgumentException("Pedido invalido");
+        }
+        
         for(IMetodoDescontoPedido metodoDescontoPedido : descontosDePedido){   
             metodoDescontoPedido.aplicarDesconto(pedido);
             

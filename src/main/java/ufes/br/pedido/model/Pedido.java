@@ -20,7 +20,7 @@ public class Pedido {
     public Pedido(double taxaEntrega, LocalDate dataPedido, Cliente cliente){
         // verificar valores de taxaEntrega, dataPedido e cliente, se não atenderem lançar exceção
         if(taxaEntrega < 0 || dataPedido == null || cliente == null){
-            throw new IllegalArgumentException("Dados invalidos para criar um pedido. ");
+            throw new IllegalArgumentException("Dados do pedido invalidos");
         }
         
         this.taxaEntrega = taxaEntrega;
@@ -32,14 +32,14 @@ public class Pedido {
     }
     
     public void adicionarItem(Item item){
-        if(item == null) throw new IllegalArgumentException("Exceção: Item invalido. "); 
+        if(item == null) throw new IllegalArgumentException("Item invalido"); 
         itens.add(item);
     }
     
     public double getValorPedido(){
         double valorPedido = itens.stream().mapToDouble(Item::getValorTotal).sum();
         System.out.println(getDescontoTaxaEntregaConcedido());
-        return valorPedido;
+        return valorPedido + getDescontoTaxaEntregaConcedido();
     } 
     
     public Cliente getCliente(){
@@ -59,12 +59,12 @@ public class Pedido {
     }
       
     public void aplicarDescontoTaxaEntrega(CupomDescontoEntrega cupomDescontoEntrega){
-        if(cupomDescontoEntrega == null) throw new IllegalArgumentException("Exceção: Cupom de desconto de entrega invalido. ");  
+        if(cupomDescontoEntrega == null) throw new IllegalArgumentException("Cupom de desconto de entrega invalido");  
         cuponsDescontoEntrega.add(cupomDescontoEntrega);
     }
     
     public void aplicarDescontoPedido(CupomDescontoPedido cupomDescontoPedido){
-        if(cupomDescontoPedido == null) throw new IllegalArgumentException("Exceção: Cupom de desconto de pedido invalido. ");  
+        if(cupomDescontoPedido == null) throw new IllegalArgumentException("Cupom de desconto de pedido invalido");  
         cuponsDescontoPedido.add(cupomDescontoPedido);
     }
     

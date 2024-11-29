@@ -6,7 +6,6 @@ package ufes.br.descontopedido;
 
 import java.util.HashMap;
 import java.util.Map;
-import ufes.br.pedido.model.CupomDescontoEntrega;
 import ufes.br.pedido.model.CupomDescontoPedido;
 import ufes.br.pedido.model.Item;
 import ufes.br.pedido.model.Pedido;

@@ -1,20 +1,8 @@
 package ufes.br.descontotaxaentrega;
 
 import java.util.ArrayList;
-import ufes.br.descontotaxaentrega.IMetodoDescontoTaxaEntrega;
 import ufes.br.pedido.model.Pedido;
 import java.util.List;
-import ufes.br.descontotaxaentrega.IMetodoDescontoTaxaEntrega;
-import ufes.br.descontotaxaentrega.MetodoDescontoTaxaEntregaPorDataPedido;
-import ufes.br.descontotaxaentrega.MetodoDescontoTaxaEntregaPorDataPedido;
-import ufes.br.descontotaxaentrega.MetodoDescontoTaxaEntregaPorBairro;
-import ufes.br.descontotaxaentrega.MetodoDescontoTaxaEntregaPorBairro;
-import ufes.br.descontotaxaentrega.MetodoDescontoTaxaEntregaPorTipoCliente;
-import ufes.br.descontotaxaentrega.MetodoDescontoTaxaEntregaPorTipoCliente;
-import ufes.br.descontotaxaentrega.MetodoDescontoTaxaEntregaPorTipoItem;
-import ufes.br.descontotaxaentrega.MetodoDescontoTaxaEntregaPorTipoItem;
-import ufes.br.descontotaxaentrega.MetodoDescontoTaxaEntregaPorValorPedido;
-import ufes.br.descontotaxaentrega.MetodoDescontoTaxaEntregaPorValorPedido;
 
 /**
  *
@@ -33,6 +21,9 @@ public class CalculadoraDescontoTaxaEntregaService {
     }
     
     public void calcularTaxaDesconto(Pedido pedido){
+        if(pedido == null){
+            throw new IllegalArgumentException("Pedido invalido");
+        }
         for(IMetodoDescontoTaxaEntrega metodoDesconto : metodosDeDesconto){   
             metodoDesconto.calcularDesconto(pedido);
         }   

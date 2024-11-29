@@ -14,6 +14,9 @@ public class CupomDescontoEntrega {
     private final double valorTaxaEntrega;
     
     public CupomDescontoEntrega(String nomeMetodo, double valorDesconto, double valorTaxaEntrega){
+        if(nomeMetodo == null || valorDesconto < 0.0 || valorTaxaEntrega < 0.0){
+            throw new IllegalArgumentException("Dados do cupom de desconto entrega invalidos");
+        }
         this.nomeMetodo = nomeMetodo;
         this.valorDesconto = valorDesconto;
         this.valorTaxaEntrega = valorTaxaEntrega;

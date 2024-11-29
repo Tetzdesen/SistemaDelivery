@@ -6,9 +6,10 @@ package ufes.br.descontopedido;
 
 import java.util.HashMap;
 import java.util.Map;
-import ufes.br.model.CupomDescontoPedido;
-import ufes.br.model.Item;
-import ufes.br.model.Pedido;
+import ufes.br.pedido.model.CupomDescontoEntrega;
+import ufes.br.pedido.model.CupomDescontoPedido;
+import ufes.br.pedido.model.Item;
+import ufes.br.pedido.model.Pedido;
 
 /**
  *
@@ -33,8 +34,9 @@ public class MetodoDescontoPedidoPorTipoItem implements IMetodoDescontoPedido {
             for(Item item : pedido.getItens()){
                valorDesconto += descontosPorTipoItem.get(item.getTipo());
             }
-            
-            pedido.aplicarDescontoTaxaEntrega(new CupomDescontoPedido("Desconto no pedido por tipo de item ", valorDesconto, pedido.getValorPedido())); 
+            if(podeAplicar(pedido) == false){
+                pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo tipo de item", valorDesconto, pedido.getValorPedido()));
+            }
         }
     }
 
@@ -45,6 +47,14 @@ public class MetodoDescontoPedidoPorTipoItem implements IMetodoDescontoPedido {
             isPedidoAplicavel = descontosPorTipoItem.containsKey(item.getTipo());   
         }
         return isPedidoAplicavel;
+    }
+    
+    private boolean podeAplicar(Pedido pedido){
+        boolean ehAplicavel = false;
+        for(CupomDescontoPedido cupomDescontoPedido : pedido.getCuponsDescontoPedido()){
+            ehAplicavel = cupomDescontoPedido.getNomeMetodo().equals("Desconto no pedido pelo codigo de cupom") || cupomDescontoPedido.getNomeMetodo().equals("Desconto no pedido pelo tipo de cliente");
+        }
+        return ehAplicavel;
     }
     
 }

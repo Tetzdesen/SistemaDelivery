@@ -6,35 +6,47 @@ package ufes.br.descontopedido;
 
 import java.util.HashMap;
 import java.util.Map;
-import ufes.br.model.CupomDescontoPedido;
-import ufes.br.model.Pedido;
+import ufes.br.pedido.model.CupomDescontoPedido;
+import ufes.br.pedido.model.Pedido;
 
 /**
  *
  * @author tetzner
  */
 public class MetodoDescontoPedidoPorCodigo implements IMetodoDescontoPedido {
-    private Map<String, Double> codigosDeDesconto;
+    private final Map<String, Double> codigosDeDesconto;
+    private final String codigoDeCupom;
     
-    public MetodoDescontoPedidoPorCodigo(){
+    public MetodoDescontoPedidoPorCodigo(String codigoCupom){
         codigosDeDesconto = new HashMap<>();
         codigosDeDesconto.put("DESC10", 0.10);
         codigosDeDesconto.put("DESC20", 0.20);
         codigosDeDesconto.put("DESC30", 0.30);
+        this.codigoDeCupom = codigoCupom;
     }
     
     @Override
     public void aplicarDesconto(Pedido pedido) {  
         double desconto;
         if(seAplica(pedido)){
-            desconto = codigosDeDesconto.get(pedido.getCodigoDeCupom());
-            pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo código de cupom", desconto, pedido.getValorPedido()));
+            desconto = codigosDeDesconto.get(codigoDeCupom);
+            if(podeAplicar(pedido) == false){
+               pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo codigo de cupom", desconto, pedido.getValorPedido()));
+            }
         }
     }
 
     @Override
     public boolean seAplica(Pedido pedido) {
-        return codigosDeDesconto.containsKey(pedido.getCodigoDeCupom());
+        return codigosDeDesconto.containsKey(codigoDeCupom);
+    }
+    
+    private boolean podeAplicar(Pedido pedido){
+        boolean ehAplicavel = false;
+        for(CupomDescontoPedido cupomDescontoPedido : pedido.getCuponsDescontoPedido()){
+            ehAplicavel = cupomDescontoPedido.getNomeMetodo().equals("Desconto no pedido pelo tipo de item");
+        }
+        return ehAplicavel;
     }
     
 }

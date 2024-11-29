@@ -1,4 +1,4 @@
-package ufes.br.model;
+package ufes.br.pedido.model;
 
 /**
  *

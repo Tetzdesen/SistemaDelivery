@@ -2,17 +2,16 @@ package ufes.br.descontotaxaentrega;
 
 import java.util.HashMap;
 import java.util.Map;
-import ufes.br.interfaces.IMetodoDescontoTaxaEntrega;
-import ufes.br.model.CupomDescontoEntrega;
-import ufes.br.model.Pedido;
+import ufes.br.pedido.model.CupomDescontoEntrega;
+import ufes.br.pedido.model.Pedido;
 
 /**
  *
  * @author tetzner
  */
-public class MetodoDescontoTaxaPorBairro implements IMetodoDescontoTaxaEntrega {
+public class MetodoDescontoTaxaEntregaPorBairro implements IMetodoDescontoTaxaEntrega {
     private final Map<String, Double> descontosPorBairro;
-    public MetodoDescontoTaxaPorBairro(){
+    public MetodoDescontoTaxaEntregaPorBairro(){
         this.descontosPorBairro = new HashMap<>();
         descontosPorBairro.put("Centro", 0.20);
         descontosPorBairro.put("Bela Vista", 0.30);

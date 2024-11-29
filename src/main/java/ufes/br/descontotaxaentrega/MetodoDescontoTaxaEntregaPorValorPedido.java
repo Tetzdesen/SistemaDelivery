@@ -1,19 +1,17 @@
 package ufes.br.descontotaxaentrega;
 
-import ufes.br.model.CupomDesconto;
-import ufes.br.interfaces.IMetodoDescontoTaxaEntrega;
-import ufes.br.model.CupomDescontoEntrega;
-import ufes.br.model.Pedido;
+import ufes.br.pedido.model.CupomDescontoEntrega;
+import ufes.br.pedido.model.Pedido;
 
 /**
  *
  * @author tetzner
  */
-public class MetodoDescontoValorPedido implements IMetodoDescontoTaxaEntrega {
+public class MetodoDescontoTaxaEntregaPorValorPedido implements IMetodoDescontoTaxaEntrega {
     private final double limiteValorPedido;
     private static final double VALOR_DESCONTO = 0.15;
     
-    public MetodoDescontoValorPedido(double limiteValorPedido){
+    public MetodoDescontoTaxaEntregaPorValorPedido(double limiteValorPedido){
         this.limiteValorPedido = limiteValorPedido;
     }
     
@@ -26,8 +24,7 @@ public class MetodoDescontoValorPedido implements IMetodoDescontoTaxaEntrega {
 
     @Override
     public boolean seAplica(Pedido pedido) {
-        return (pedido.getValorPedido() - pedido.getDescontoPercentualConcedido()) > limiteValorPedido;
-            //return (pedido.getValorPedido() - pedido.getTaxaEntrega()) > limiteValorPedido;
+        return (pedido.getValorPedido() - pedido.getDescontoTaxaEntregaConcedido()) > limiteValorPedido;
     }
  }
     

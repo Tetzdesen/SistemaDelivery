@@ -4,7 +4,7 @@
  */
 package ufes.br.descontopedido;
 
-import ufes.br.model.Pedido;
+import ufes.br.pedido.model.Pedido;
 
 /**
  *

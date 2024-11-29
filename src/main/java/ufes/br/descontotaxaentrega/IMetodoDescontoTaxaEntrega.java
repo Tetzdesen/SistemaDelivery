@@ -1,6 +1,6 @@
-package ufes.br.interfaces;
+package ufes.br.descontotaxaentrega;
 
-import ufes.br.model.Pedido;
+import ufes.br.pedido.model.Pedido;
 
 /**
  *

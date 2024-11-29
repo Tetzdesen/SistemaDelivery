@@ -2,19 +2,18 @@ package ufes.br.descontotaxaentrega;
 
 import java.util.HashMap;
 import java.util.Map;
-import ufes.br.interfaces.IMetodoDescontoTaxaEntrega;
-import ufes.br.model.CupomDescontoEntrega;
-import ufes.br.model.Item;
-import ufes.br.model.Pedido;
+import ufes.br.pedido.model.CupomDescontoEntrega;
+import ufes.br.pedido.model.Item;
+import ufes.br.pedido.model.Pedido;
 
 /**
  *
  * @author tetzner
  */
-public class MetodoDescontoTipoItem implements IMetodoDescontoTaxaEntrega {
-    private Map<String, Double> descontosPorTipoItem;
+public class MetodoDescontoTaxaEntregaPorTipoItem implements IMetodoDescontoTaxaEntrega {
+    private final Map<String, Double> descontosPorTipoItem;
     
-    public MetodoDescontoTipoItem(){
+    public MetodoDescontoTaxaEntregaPorTipoItem(){
         descontosPorTipoItem = new HashMap<>();
         descontosPorTipoItem.put("Alimentação", 0.05);
         descontosPorTipoItem.put("Educação", 0.20);

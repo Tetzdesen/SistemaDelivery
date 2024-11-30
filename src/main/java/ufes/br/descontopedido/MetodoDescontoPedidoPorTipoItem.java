@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ufes.br.descontopedido;
 
 import java.util.HashMap;
@@ -14,7 +10,7 @@ import ufes.br.pedido.model.Pedido;
  *
  * @author tetzner
  */
-public class MetodoDescontoPedidoPorTipoItem implements IMetodoDescontoPedido {
+public final class MetodoDescontoPedidoPorTipoItem implements IMetodoDescontoPedido {
     
     private final Map<String, Double> descontosPorTipoItem;
     
@@ -33,27 +29,25 @@ public class MetodoDescontoPedidoPorTipoItem implements IMetodoDescontoPedido {
             for(Item item : pedido.getItens()){
                valorDesconto += descontosPorTipoItem.get(item.getTipo());
             }
-            if(podeAplicar(pedido) == false){
-                pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo tipo de item", valorDesconto, pedido.getValorPedido()));
-            }
+                pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo tipo de item", valorDesconto, pedido.getValorTotalPedido()));
         }
     }
 
     @Override
     public boolean seAplica(Pedido pedido) {
-        boolean isPedidoAplicavel = false;
+        boolean pedidoEhAplicavel = false, possuiCumpoDeCodigoOuTipo = false;
+        
         for(Item item: pedido.getItens()){
-            isPedidoAplicavel = descontosPorTipoItem.containsKey(item.getTipo());   
+            if(descontosPorTipoItem.containsKey(item.getTipo())){
+                pedidoEhAplicavel = true;
+            }
         }
-        return isPedidoAplicavel;
-    }
-    
-    private boolean podeAplicar(Pedido pedido){
-        boolean ehAplicavel = false;
+        
         for(CupomDescontoPedido cupomDescontoPedido : pedido.getCuponsDescontoPedido()){
-            ehAplicavel = cupomDescontoPedido.getNomeMetodo().equals("Desconto no pedido pelo codigo de cupom") || cupomDescontoPedido.getNomeMetodo().equals("Desconto no pedido pelo tipo de cliente");
+            possuiCumpoDeCodigoOuTipo = cupomDescontoPedido.getNomeMetodo().equals("Desconto no pedido pelo codigo de cupom") || cupomDescontoPedido.getNomeMetodo().equals("Desconto no pedido pelo tipo de cliente");
         }
-        return ehAplicavel;
+        
+        return !possuiCumpoDeCodigoOuTipo && pedidoEhAplicavel;
     }
     
 }

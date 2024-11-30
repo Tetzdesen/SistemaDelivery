@@ -9,7 +9,7 @@ import ufes.br.pedido.model.Pedido;
  *
  * @author tetzner
  */
-public class MetodoDescontoTaxaEntregaPorBairro implements IMetodoDescontoTaxaEntrega {
+public final class MetodoDescontoTaxaEntregaPorBairro implements IMetodoDescontoTaxaEntrega {
     private final Map<String, Double> descontosPorBairro;
     public MetodoDescontoTaxaEntregaPorBairro(){
         this.descontosPorBairro = new HashMap<>();

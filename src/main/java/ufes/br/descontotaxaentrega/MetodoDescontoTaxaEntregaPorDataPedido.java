@@ -12,7 +12,7 @@ import ufes.br.pedido.model.Pedido;
  * @author tetzner
  */
 
-public class MetodoDescontoTaxaEntregaPorDataPedido implements IMetodoDescontoTaxaEntrega {
+public final class MetodoDescontoTaxaEntregaPorDataPedido implements IMetodoDescontoTaxaEntrega {
     private final Map<LocalDate,Double> descontosPorData;
     
     public MetodoDescontoTaxaEntregaPorDataPedido(){   

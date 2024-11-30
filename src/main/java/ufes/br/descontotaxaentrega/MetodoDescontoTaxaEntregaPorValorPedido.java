@@ -7,7 +7,7 @@ import ufes.br.pedido.model.Pedido;
  *
  * @author tetzner
  */
-public class MetodoDescontoTaxaEntregaPorValorPedido implements IMetodoDescontoTaxaEntrega {
+public final class MetodoDescontoTaxaEntregaPorValorPedido implements IMetodoDescontoTaxaEntrega {
     private final double limiteValorPedido;
     private static final double VALOR_DESCONTO = 0.15;
     
@@ -24,7 +24,7 @@ public class MetodoDescontoTaxaEntregaPorValorPedido implements IMetodoDescontoT
 
     @Override
     public boolean seAplica(Pedido pedido) {
-        return (pedido.getValorPedido() - pedido.getDescontoTaxaEntregaConcedido()) > limiteValorPedido;
+        return pedido.getValorPedido() > limiteValorPedido;
     }
  }
     

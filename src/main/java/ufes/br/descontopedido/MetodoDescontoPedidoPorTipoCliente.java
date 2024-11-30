@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ufes.br.descontopedido;
 
 import java.util.HashMap;
@@ -13,7 +9,7 @@ import ufes.br.pedido.model.Pedido;
  *
  * @author tetzner
  */
-public class MetodoDescontoPedidoPorTipoCliente implements IMetodoDescontoPedido {
+public final class MetodoDescontoPedidoPorTipoCliente implements IMetodoDescontoPedido {
 
     private final Map<String,Double> descontosPorTipoCliente;
     
@@ -30,24 +26,17 @@ public class MetodoDescontoPedidoPorTipoCliente implements IMetodoDescontoPedido
         
         if(seAplica(pedido)){
             valorDesconto = descontosPorTipoCliente.get(pedido.getCliente().getTipo());
-            if(podeAplicar(pedido) == false){
-                pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo tipo de cliente", valorDesconto, pedido.getValorPedido()));
-            }
-      
+            pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo tipo de cliente", valorDesconto, pedido.getValorTotalPedido()));
         }
     }
 
     @Override
     public boolean seAplica(Pedido pedido) {
-        return descontosPorTipoCliente.containsKey(pedido.getCliente().getTipo());
-    }
-    
-    private boolean podeAplicar(Pedido pedido){
-        boolean ehAplicavel = false;
+        boolean possuiCupomItem = false;
         for(CupomDescontoPedido cupomDescontoPedido : pedido.getCuponsDescontoPedido()){
-            ehAplicavel = cupomDescontoPedido.getNomeMetodo().equals("Desconto no pedido pelo tipo de item");
+            possuiCupomItem = cupomDescontoPedido.getNomeMetodo().equals("Desconto no pedido pelo tipo de item");
         }
-        return ehAplicavel;
+        return !possuiCupomItem && descontosPorTipoCliente.containsKey(pedido.getCliente().getTipo());
     }
     
 }

@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author tetzner
  */
-public class Pedido {
+public final class Pedido {
     private double taxaEntrega;
     private LocalDate dataPedido;
     private Cliente cliente;
@@ -37,9 +37,13 @@ public class Pedido {
     }
     
     public double getValorPedido(){
-        double valorPedido = itens.stream().mapToDouble(Item::getValorTotal).sum();
-        System.out.println(getDescontoTaxaEntregaConcedido());
-        return valorPedido + getDescontoTaxaEntregaConcedido();
+        return itens.stream().mapToDouble(Item::getValorTotal).sum();
+    } 
+    
+    public double getValorTotalPedido(){
+        double descontoPedido = getDescontoPedidoConcedido();
+        double descontoTaxaEntrega = getDescontoTaxaEntregaConcedido();
+        return descontoPedido + descontoTaxaEntrega;
     } 
     
     public Cliente getCliente(){
@@ -75,7 +79,8 @@ public class Pedido {
     
     public double getDescontoPedidoConcedido(){
        double descontoPedidoConcedido = cuponsDescontoPedido.stream().mapToDouble(CupomDescontoPedido::getValorDesconto).sum();
-       return Math.min(getValorPedido() - (getValorPedido() * descontoPedidoConcedido), getValorPedido());
+       double valorTotalPedido = getValorPedido() + getDescontoTaxaEntregaConcedido();
+       return Math.min(valorTotalPedido- (valorTotalPedido * descontoPedidoConcedido), getValorPedido());
     }
     
     public List<CupomDescontoEntrega> getCuponsDescontoEntrega(){
@@ -85,7 +90,7 @@ public class Pedido {
     public List<CupomDescontoPedido> getCuponsDescontoPedido(){
        return Collections.unmodifiableList(cuponsDescontoPedido);
     }
-
+    
     @Override
     public String toString() {
         return "Pedido{" + "taxaEntrega=" + taxaEntrega + ", dataPedido=" + dataPedido + ", cliente=" + cliente + ", itens=" + itens + ", cuponsDescontoEntrega=" + cuponsDescontoEntrega + ", cuponsDescontoPedido=" + cuponsDescontoPedido + '}';

@@ -5,7 +5,7 @@ import ufes.br.pedido.model.Pedido;
 import ufes.br.pedido.model.Item;
 import ufes.br.pedido.model.Cliente;
 import java.time.LocalDate;
-import ufes.br.descontopedido.GestorDeDescontoPedidoService;
+import ufes.br.descontopedido.CalculadoraDescontoPedidoService;
 
 /**
  *
@@ -15,7 +15,7 @@ public class Principal {
 
     public static void main(String[] args) {
         
-        Cliente cliente = new Cliente("Gabriel Tetzner", "Ouro", 3.0, "...", "Guararema","Alegre");
+        Cliente cliente = new Cliente("Gabriel Tetzner", "Ouro", 2.0, "", "Guararema","Alegre");
         
         Pedido pedido = new Pedido(10.00, LocalDate.now(), cliente);
         
@@ -31,25 +31,27 @@ public class Principal {
         
         CalculadoraDescontoTaxaEntregaService calculadora = new CalculadoraDescontoTaxaEntregaService();
         
-        System.out.println("Valor do pedido atual: R$ " + pedido.getValorPedido());
+        System.out.println("Valor do pedido atual com a taxa de entrega: R$ " + pedido.getValorTotalPedido());
         
-        calculadora.calcularTaxaDesconto(pedido);
-          System.out.println(pedido);
+        calculadora.calcularDescontoTaxaEntrega(pedido);
+        
         double valorDesconto = pedido.getDescontoTaxaEntregaConcedido();
 
-        System.out.println("Desconto na taxa de entrega concedida: R$ " + valorDesconto);
+        System.out.println("Taxa de entrega após o desconto: R$ " + valorDesconto);
         
-        System.out.println("Valor do pedido apos o calculo da taxa de entrega: R$ " + pedido.getValorPedido());
+        System.out.println("Valor do pedido apos o calculo da taxa de entrega: R$ " + pedido.getValorTotalPedido());
          
-        GestorDeDescontoPedidoService gestorDesconto = new GestorDeDescontoPedidoService();
+        CalculadoraDescontoPedidoService gestorDesconto = new CalculadoraDescontoPedidoService();
         
-        gestorDesconto.calcularTaxaDescontoPedido(pedido);
+        gestorDesconto.calcularDescontoPedido(pedido);
         
-        System.out.println("Desconto no pedido concedido: R$ " + pedido.getDescontoPedidoConcedido());
+        System.out.println("Valor do pedido após o desconto por valor de pedido: R$ " + pedido.getDescontoPedidoConcedido());
+        
+        System.out.println(pedido);
         
         System.out.println(pedido.getCuponsDescontoPedido());
         
-        System.out.println("Valor do pedido apos o calculo de desconto baseado no pedido: R$ " + pedido.getValorPedido());
+        System.out.println("Valor do pedido após o desconto por valor de pedido: R$ " + pedido.getValorTotalPedido());
        
     }   
 }

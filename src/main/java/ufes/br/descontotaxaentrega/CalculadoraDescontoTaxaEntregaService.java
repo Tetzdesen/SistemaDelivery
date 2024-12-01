@@ -24,8 +24,8 @@ public final class CalculadoraDescontoTaxaEntregaService {
         if(pedido == null){
             throw new IllegalArgumentException("Pedido invalido");
         }
-        for(IMetodoDescontoTaxaEntrega metodoDesconto : metodosDeDescontoTaxaEntrega){   
-            metodoDesconto.calcularDesconto(pedido);
+        for(IMetodoDescontoTaxaEntrega metodoDescontoTaxaEntrega : metodosDeDescontoTaxaEntrega){   
+            metodoDescontoTaxaEntrega.calcularDesconto(pedido);
         }   
     }
     

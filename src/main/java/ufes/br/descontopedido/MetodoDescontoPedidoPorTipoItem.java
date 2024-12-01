@@ -29,7 +29,7 @@ public final class MetodoDescontoPedidoPorTipoItem implements IMetodoDescontoPed
             for(Item item : pedido.getItens()){
                valorDesconto += descontosPorTipoItem.get(item.getTipo());
             }
-               pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo tipo de item", valorDesconto, pedido.getValorTotalPedido()));
+               pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo tipo de item", valorDesconto));
         }
     }
 

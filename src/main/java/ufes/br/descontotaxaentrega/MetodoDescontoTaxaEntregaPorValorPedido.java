@@ -21,7 +21,7 @@ public final class MetodoDescontoTaxaEntregaPorValorPedido implements IMetodoDes
     @Override
     public void calcularDesconto(Pedido pedido) { 
         if(seAplica(pedido)){         
-            pedido.aplicarDescontoTaxaEntrega(new CupomDescontoEntrega("Desconto por valor pedido", VALOR_DESCONTO, pedido.getTaxaEntrega()));
+            pedido.aplicarDescontoTaxaEntrega(new CupomDescontoEntrega("Desconto por valor pedido", VALOR_DESCONTO));
         }
     }
 

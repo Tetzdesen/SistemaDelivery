@@ -32,5 +32,4 @@ public final class Item {
     public String toString() {
         return "Item{" + "nome=" + nome + ", quantidade=" + quantidade + ", valorUnitario=" + valorUnitario + ", tipo=" + tipo + '}';
     }
- 
 }

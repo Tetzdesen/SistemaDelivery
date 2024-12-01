@@ -18,7 +18,6 @@ public final class Pedido {
     private final List<CupomDescontoEntrega> cuponsDescontoEntrega;
     private final List<CupomDescontoPedido> cuponsDescontoPedido;
 
-    
     public Pedido(double taxaEntrega, LocalDate dataPedido, Cliente cliente, String codigoDeCupom){
         if(taxaEntrega < 0 || dataPedido == null || cliente == null || codigoDeCupom == null){
             throw new IllegalArgumentException("Dados do pedido invalidos");
@@ -39,14 +38,12 @@ public final class Pedido {
     }
     
     public double getValorPedido(){
-        return itens.stream().mapToDouble(Item::getValorTotal).sum();
-    } 
-    
-    public double getValorTotalPedido(){
-        double descontoPedido = getDescontoPedidoConcedido();
-        double descontoTaxaEntrega = getDescontoTaxaEntregaConcedido();
-        System.out.println(descontoTaxaEntrega);
-        return descontoPedido + descontoTaxaEntrega;
+       
+       double valorItens = itens.stream().mapToDouble(Item::getValorTotal).sum();
+        
+       double valorPedido = valorItens + getDescontoTaxaEntregaConcedido();
+       
+       return valorPedido;
     } 
     
     public Cliente getCliente(){
@@ -77,11 +74,8 @@ public final class Pedido {
     }
     
     public double getDescontoPedidoConcedido(){
-       double descontoPedidoConcedido = cuponsDescontoPedido.stream().mapToDouble(CupomDescontoPedido::getValorDesconto).sum();
-   
-       double valorTotalPedido = getValorPedido() + getDescontoTaxaEntregaConcedido();
-       System.out.println(valorTotalPedido);
-       return Math.min(valorTotalPedido - (valorTotalPedido * descontoPedidoConcedido), valorTotalPedido);
+      double descontoPedidoConcedido = cuponsDescontoPedido.stream().mapToDouble(CupomDescontoPedido::getValorDesconto).sum();
+      return Math.min((getValorPedido() - (getValorPedido()  *  descontoPedidoConcedido)), getValorPedido());
     }
     
     public String getCodigoDeCupom(){
@@ -99,10 +93,9 @@ public final class Pedido {
     public List<CupomDescontoPedido> getCuponsDescontoPedido(){
        return Collections.unmodifiableList(cuponsDescontoPedido);
     }
-    
+
     @Override
     public String toString() {
-        return "Pedido{" + "taxaEntrega=" + taxaEntrega + ", dataPedido=" + dataPedido + ", cliente=" + cliente + ", itens=" + itens + ", cuponsDescontoEntrega=" + cuponsDescontoEntrega + ", cuponsDescontoPedido=" + cuponsDescontoPedido + '}';
+        return "Pedido{" + "taxaEntrega=" + taxaEntrega + ", dataPedido=" + dataPedido + ", cliente=" + cliente + ", codigoDeCupom=" + codigoDeCupom + ", itens=" + itens + ", cuponsDescontoEntrega=" + cuponsDescontoEntrega + ", cuponsDescontoPedido=" + cuponsDescontoPedido + '}';
     }
-
 }

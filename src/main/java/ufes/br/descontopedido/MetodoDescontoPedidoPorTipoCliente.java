@@ -26,7 +26,7 @@ public final class MetodoDescontoPedidoPorTipoCliente implements IMetodoDesconto
         
         if(seAplica(pedido)){
             valorDesconto = descontosPorTipoCliente.get(pedido.getCliente().getTipo());
-            pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo tipo de cliente", valorDesconto, pedido.getValorTotalPedido()));
+            pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo tipo de cliente", valorDesconto));
         }
     }
 

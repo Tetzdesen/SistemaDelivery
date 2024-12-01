@@ -25,7 +25,7 @@ public final class MetodoDescontoTaxaEntregaPorDataPedido implements IMetodoDesc
     @Override
     public void calcularDesconto(Pedido pedido) {
         if(seAplica(pedido)){
-            pedido.aplicarDescontoTaxaEntrega(new CupomDescontoEntrega("Desconto por data", descontosPorData.get(pedido.getDataPedido()), pedido.getTaxaEntrega()));
+            pedido.aplicarDescontoTaxaEntrega(new CupomDescontoEntrega("Desconto por data", descontosPorData.get(pedido.getDataPedido())));
         }
     }
 

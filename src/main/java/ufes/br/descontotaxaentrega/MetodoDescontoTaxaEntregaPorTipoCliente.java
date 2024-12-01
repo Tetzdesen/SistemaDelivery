@@ -24,7 +24,7 @@ public final class MetodoDescontoTaxaEntregaPorTipoCliente implements IMetodoDes
         
         if(seAplica(pedido)){
             valorDesconto = descontosPorTipoCliente.get(pedido.getCliente().getTipo());
-            pedido.aplicarDescontoTaxaEntrega(new CupomDescontoEntrega("Desconto por tipo de cliente", valorDesconto, pedido.getTaxaEntrega()));
+            pedido.aplicarDescontoTaxaEntrega(new CupomDescontoEntrega("Desconto por tipo de cliente", valorDesconto));
         }
     }
 

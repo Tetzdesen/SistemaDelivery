@@ -13,13 +13,14 @@ public final class Pedido {
     private double taxaEntrega;
     private LocalDate dataPedido;
     private Cliente cliente;
+    private final String codigoDeCupom;
     private final List<Item> itens;
     private final List<CupomDescontoEntrega> cuponsDescontoEntrega;
     private final List<CupomDescontoPedido> cuponsDescontoPedido;
+
     
-    public Pedido(double taxaEntrega, LocalDate dataPedido, Cliente cliente){
-        // verificar valores de taxaEntrega, dataPedido e cliente, se não atenderem lançar exceção
-        if(taxaEntrega < 0 || dataPedido == null || cliente == null){
+    public Pedido(double taxaEntrega, LocalDate dataPedido, Cliente cliente, String codigoDeCupom){
+        if(taxaEntrega < 0 || dataPedido == null || cliente == null || codigoDeCupom == null){
             throw new IllegalArgumentException("Dados do pedido invalidos");
         }
         
@@ -29,6 +30,7 @@ public final class Pedido {
         this.itens = new ArrayList<>();
         this.cuponsDescontoEntrega = new ArrayList<>();
         this.cuponsDescontoPedido = new ArrayList<>();
+        this.codigoDeCupom = codigoDeCupom;
     }
     
     public void adicionarItem(Item item){
@@ -43,17 +45,14 @@ public final class Pedido {
     public double getValorTotalPedido(){
         double descontoPedido = getDescontoPedidoConcedido();
         double descontoTaxaEntrega = getDescontoTaxaEntregaConcedido();
+        System.out.println(descontoTaxaEntrega);
         return descontoPedido + descontoTaxaEntrega;
     } 
     
     public Cliente getCliente(){
         return cliente;
     }
-    
-    public List<Item> getItens(){
-        return Collections.unmodifiableList(itens);
-    }
-    
+   
     public double getTaxaEntrega(){
         return taxaEntrega;
     }
@@ -79,8 +78,18 @@ public final class Pedido {
     
     public double getDescontoPedidoConcedido(){
        double descontoPedidoConcedido = cuponsDescontoPedido.stream().mapToDouble(CupomDescontoPedido::getValorDesconto).sum();
+   
        double valorTotalPedido = getValorPedido() + getDescontoTaxaEntregaConcedido();
-       return Math.min(valorTotalPedido- (valorTotalPedido * descontoPedidoConcedido), getValorPedido());
+       System.out.println(valorTotalPedido);
+       return Math.min(valorTotalPedido - (valorTotalPedido * descontoPedidoConcedido), valorTotalPedido);
+    }
+    
+    public String getCodigoDeCupom(){
+        return codigoDeCupom;
+    }
+    
+    public List<Item> getItens(){
+        return Collections.unmodifiableList(itens);
     }
     
     public List<CupomDescontoEntrega> getCuponsDescontoEntrega(){

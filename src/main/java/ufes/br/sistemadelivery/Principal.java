@@ -17,7 +17,7 @@ public class Principal {
         
         Cliente cliente = new Cliente("Gabriel Tetzner", "Ouro", 2.0, "", "Guararema","Alegre");
         
-        Pedido pedido = new Pedido(10.00, LocalDate.now(), cliente);
+        Pedido pedido = new Pedido(10.00, LocalDate.now(), cliente, "DESC10");
         
         Item item1 = new Item("Lápis", 2, 1.00, "Educação");
         Item item2 = new Item("Caneta", 5, 1.50, "Educação");
@@ -37,21 +37,21 @@ public class Principal {
         
         double valorDesconto = pedido.getDescontoTaxaEntregaConcedido();
 
-        System.out.println("Taxa de entrega após o desconto: R$ " + valorDesconto);
+        System.out.println("\nTaxa de entrega apos o desconto: R$ " + valorDesconto);
         
-        System.out.println("Valor do pedido apos o calculo da taxa de entrega: R$ " + pedido.getValorTotalPedido());
+        System.out.println("\nValor do pedido apos o desconto na taxa de entrega: R$ " + pedido.getValorTotalPedido());
          
         CalculadoraDescontoPedidoService gestorDesconto = new CalculadoraDescontoPedidoService();
         
         gestorDesconto.calcularDescontoPedido(pedido);
         
-        System.out.println("Valor do pedido após o desconto por valor de pedido: R$ " + pedido.getDescontoPedidoConcedido());
+        System.out.println("\nValor do pedido apos o desconto por valor de pedido: R$ " + pedido.getDescontoPedidoConcedido());
         
         System.out.println(pedido);
         
         System.out.println(pedido.getCuponsDescontoPedido());
         
-        System.out.println("Valor do pedido após o desconto por valor de pedido: R$ " + pedido.getValorTotalPedido());
+        System.out.println("\nValor do pedido com desconto (taxa de entrega somada): R$ " + pedido.getValorTotalPedido());
        
     }   
 }

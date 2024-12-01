@@ -12,6 +12,9 @@ public final class MetodoDescontoTaxaEntregaPorValorPedido implements IMetodoDes
     private static final double VALOR_DESCONTO = 0.15;
     
     public MetodoDescontoTaxaEntregaPorValorPedido(double limiteValorPedido){
+        if(limiteValorPedido < 0){
+            throw new IllegalArgumentException("Limite do valor do pedido invalido");
+        }
         this.limiteValorPedido = limiteValorPedido;
     }
     

@@ -29,13 +29,14 @@ public final class CupomDescontoPedido{
     public double getValorDesconto() {
         return valorDesconto;
     }
+    
+    public double getValorPedido(){
+        return valorPedido;
+    }
 
     @Override
     public String toString() {
         return "CupomDescontoPedido{" + "nomeMetodo=" + nomeMetodo + ", valorDesconto=" + valorDesconto + ", valorPedido=" + valorPedido + '}';
     }
-
-    public double getValorPedido(){
-        return valorPedido;
-    }
+ 
 }

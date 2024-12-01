@@ -11,22 +11,20 @@ import ufes.br.pedido.model.Pedido;
  */
 public final class MetodoDescontoPedidoPorCodigo implements IMetodoDescontoPedido {
     private final Map<String, Double> codigosDeDesconto;
-    private String codigoDeCupom;
     
-    public MetodoDescontoPedidoPorCodigo(String codigoDeCupom){
+    public MetodoDescontoPedidoPorCodigo(){
         codigosDeDesconto = new HashMap<>();
         codigosDeDesconto.put("DESC10", 0.10);
         codigosDeDesconto.put("DESC20", 0.20);
         codigosDeDesconto.put("DESC30", 0.30);
-        this.codigoDeCupom = codigoDeCupom;
     }
     
     @Override
     public void aplicarDesconto(Pedido pedido) {  
         double desconto;
         if(seAplica(pedido)){
-            desconto = codigosDeDesconto.get(codigoDeCupom);
-               pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo codigo de cupom", desconto, pedido.getValorTotalPedido()));
+            desconto = codigosDeDesconto.get(pedido.getCodigoDeCupom());
+            pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo codigo de cupom", desconto, pedido.getValorTotalPedido()));
         }
     }
 
@@ -36,11 +34,7 @@ public final class MetodoDescontoPedidoPorCodigo implements IMetodoDescontoPedid
         for(CupomDescontoPedido cupomDescontoPedido : pedido.getCuponsDescontoPedido()){
             ehAplicavel = cupomDescontoPedido.getNomeMetodo().equals("Desconto no pedido pelo tipo de item");
         }
-        return !ehAplicavel && codigosDeDesconto.containsKey(codigoDeCupom);
+        return !ehAplicavel && codigosDeDesconto.containsKey(pedido.getCodigoDeCupom());
     }
     
-    public void setCodigoDeCupom(String codigoDeCupom) {
-        this.codigoDeCupom = codigoDeCupom;
-    }
-
 }

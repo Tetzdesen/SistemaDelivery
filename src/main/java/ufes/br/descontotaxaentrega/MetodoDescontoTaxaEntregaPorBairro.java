@@ -23,7 +23,7 @@ public final class MetodoDescontoTaxaEntregaPorBairro implements IMetodoDesconto
         double valorDesconto;
         if(seAplica(pedido)){
             valorDesconto = descontosPorBairro.get(pedido.getCliente().getBairro());
-            pedido.aplicarDescontoTaxaEntrega(new CupomDescontoEntrega("Desconto por bairro", valorDesconto, pedido.getTaxaEntrega()));
+            pedido.aplicarDescontoTaxaEntrega(new CupomDescontoEntrega("Desconto por bairro", valorDesconto));
         }
     }
 

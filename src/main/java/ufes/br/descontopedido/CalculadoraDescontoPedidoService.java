@@ -16,7 +16,6 @@ public final class CalculadoraDescontoPedidoService {
         metodosDeDescontoPedido.add(new MetodoDescontoPedidoPorTipoCliente());
         metodosDeDescontoPedido.add(new MetodoDescontoPedidoPorCodigo());
         metodosDeDescontoPedido.add(new MetodoDescontoPedidoPorTipoItem());
-
     }
     
     public void calcularDescontoPedido(Pedido pedido){
@@ -25,13 +24,12 @@ public final class CalculadoraDescontoPedidoService {
         }
         
         for(IMetodoDescontoPedido metodoDescontoPedido : metodosDeDescontoPedido){   
-            metodoDescontoPedido.aplicarDesconto(pedido);
-            
+            metodoDescontoPedido.aplicarDesconto(pedido);      
         }  
     }
     
     public void adicionarMetodoDescontoPedido(IMetodoDescontoPedido metodoDescontoPedido){
-        if(metodoDescontoPedido == null) throw new IllegalArgumentException("Metodo de desconto de pedido invalido ");
+        if(metodoDescontoPedido == null) throw new IllegalArgumentException("Metodo de desconto de pedido invalido");
         metodosDeDescontoPedido.add(metodoDescontoPedido);
     }
    

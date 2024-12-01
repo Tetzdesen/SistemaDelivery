@@ -24,7 +24,7 @@ public final class MetodoDescontoPedidoPorCodigo implements IMetodoDescontoPedid
         double desconto;
         if(seAplica(pedido)){
             desconto = codigosDeDesconto.get(pedido.getCodigoDeCupom());
-            pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo codigo de cupom", desconto, pedido.getValorTotalPedido()));
+            pedido.aplicarDescontoPedido(new CupomDescontoPedido("Desconto no pedido pelo codigo de cupom", desconto));
         }
     }
 

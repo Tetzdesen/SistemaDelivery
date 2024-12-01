@@ -30,6 +30,9 @@ public final class CalculadoraDescontoTaxaEntregaService {
     }
     
     public void adicionarMetodoDescontoTaxaEntrega(IMetodoDescontoTaxaEntrega metodoDescontoTaxaEntrega){
+        if(metodoDescontoTaxaEntrega == null){
+            throw new IllegalArgumentException("Metodo de desconto de taxa de entrega invalida");
+        }
         metodosDeDescontoTaxaEntrega.add(metodoDescontoTaxaEntrega);
     }
     
